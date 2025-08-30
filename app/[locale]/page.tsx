@@ -1,22 +1,23 @@
 import { Metadata } from 'next'
+import { Hero } from '@/components/marketing/hero'
+import { Features } from '@/components/marketing/features'
+import { Testimonials } from '@/components/marketing/testimonials'
+import { Stats } from '@/components/marketing/stats'
+import { CTASection } from '@/components/marketing/cta-section'
 
 export const metadata: Metadata = {
-  title: 'AQS Web - Soluciones Digitales',
-  description: 'Somos una empresa especializada en desarrollo web, consultoría digital y soluciones tecnológicas innovadoras.',
+  title: 'Analytics Quiet Storm - Transformamos datos en decisiones estratégicas',
+  description: 'Somos expertos en análisis de datos y consultoría estratégica. Ayudamos a empresas a tomar decisiones basadas en datos para impulsar el crecimiento y la innovación.',
 }
 
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <section className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-bold text-center mb-8">
-          Bienvenido a AQS Web
-        </h1>
-        <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto">
-          Transformamos ideas en soluciones digitales excepcionales. 
-          Desarrollo web, consultoría y estrategias que impulsan tu negocio.
-        </p>
-      </section>
+      <Hero />
+      <Features />
+      <Stats />
+      <Testimonials />
+      <CTASection />
     </main>
   )
 }

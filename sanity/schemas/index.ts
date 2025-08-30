@@ -1,13 +1,13 @@
-import { post } from './post'
+import { page } from './page'
+import { plan } from './plan'
 import { caseStudy } from './caseStudy'
-import { service } from './service'
-import { team } from './team'
-import { testimonial } from './testimonial'
+import { post } from './post'
+import { cta } from './cta'
 
 export const schemaTypes = [
-  post,
+  page,
+  plan,
   caseStudy,
-  service,
-  team,
-  testimonial,
+  post,
+  cta,
 ]

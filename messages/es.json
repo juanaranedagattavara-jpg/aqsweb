@@ -1,0 +1,83 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "product": "Producto",
+    "consulting": "Consultoría",
+    "pricing": "Precios",
+    "cases": "Casos de Éxito",
+    "resources": "Recursos",
+    "company": "Empresa",
+    "contact": "Contacto"
+  },
+  "home": {
+    "hero": {
+      "title": "Analytics Quiet Storm",
+      "subtitle": "Transformamos datos en decisiones estratégicas",
+      "description": "Somos expertos en análisis de datos y consultoría estratégica. Ayudamos a empresas a tomar decisiones basadas en datos para impulsar el crecimiento y la innovación.",
+      "cta": "Empezar ahora",
+      "secondaryCta": "Ver demo"
+    },
+    "features": {
+      "title": "Por qué elegirnos",
+      "subtitle": "Soluciones de analytics que marcan la diferencia",
+      "items": [
+        {
+          "title": "Análisis Avanzado",
+          "description": "Utilizamos las últimas tecnologías de machine learning para extraer insights valiosos de tus datos."
+        },
+        {
+          "title": "Consultoría Experta",
+          "description": "Equipo de expertos con más de 10 años de experiencia en analytics y estrategia empresarial."
+        },
+        {
+          "title": "Resultados Medibles",
+          "description": "Cada proyecto incluye KPIs claros y reportes de ROI para demostrar el valor generado."
+        }
+      ]
+    }
+  },
+  "pricing": {
+    "title": "Planes y Precios",
+    "subtitle": "Elige el plan que mejor se adapte a tus necesidades",
+    "toggle": {
+      "monthly": "Mensual",
+      "annual": "Anual",
+      "savings": "Ahorra hasta 20%"
+    },
+    "plans": {
+      "basic": {
+        "name": "Básico",
+        "description": "Perfecto para startups y pequeñas empresas",
+        "monthlyPrice": "99",
+        "annualPrice": "79",
+        "cta": "Empezar ahora"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Ideal para empresas en crecimiento",
+        "monthlyPrice": "299",
+        "annualPrice": "239",
+        "cta": "Empezar ahora"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "Para grandes empresas y corporaciones",
+        "monthlyPrice": "599",
+        "annualPrice": "479",
+        "cta": "Hablar con ventas"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Hablemos sobre tu proyecto",
+    "form": {
+      "name": "Nombre completo",
+      "email": "Email corporativo",
+      "company": "Empresa",
+      "message": "Cuéntanos sobre tu proyecto",
+      "submit": "Enviar mensaje",
+      "success": "Mensaje enviado correctamente"
+    }
+  }
+}

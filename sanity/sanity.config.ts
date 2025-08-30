@@ -5,7 +5,7 @@ import { schemaTypes } from './schemas'
 
 export default defineConfig({
   name: 'default',
-  title: 'AQS Web CMS',
+  title: 'Analytics Quiet Storm CMS',
   
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
@@ -24,6 +24,6 @@ export default defineConfig({
   // Configuración de CORS para desarrollo
   cors: {
     credentials: true,
-    origin: ['http://localhost:3000', 'https://aqsweb.com'],
+    origin: ['http://localhost:3000', 'https://analyticsquietstorm.com'],
   },
 })

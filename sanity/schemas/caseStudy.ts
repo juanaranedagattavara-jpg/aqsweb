@@ -20,46 +20,78 @@ export const caseStudy = {
       validation: (Rule: any) => Rule.required(),
     },
     {
-      name: 'client',
-      title: 'Cliente',
+      name: 'industry',
+      title: 'Industria',
       type: 'string',
       validation: (Rule: any) => Rule.required(),
-    },
-    {
-      name: 'description',
-      title: 'Descripción',
-      type: 'text',
-      rows: 4,
     },
     {
       name: 'challenge',
       title: 'Desafío',
       type: 'text',
       rows: 3,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: 'solution',
       title: 'Solución',
       type: 'text',
       rows: 4,
+      validation: (Rule: any) => Rule.required(),
     },
     {
       name: 'results',
       title: 'Resultados',
       type: 'array',
       of: [{ type: 'string' }],
+      validation: (Rule: any) => Rule.required(),
     },
     {
-      name: 'services',
-      title: 'Servicios Utilizados',
+      name: 'kpis',
+      title: 'KPIs',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'service' } }],
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'label',
+              title: 'Etiqueta',
+              type: 'string',
+            },
+            {
+              name: 'value',
+              title: 'Valor',
+              type: 'string',
+            },
+            {
+              name: 'unit',
+              title: 'Unidad',
+              type: 'string',
+            },
+          ],
+        },
+      ],
     },
     {
-      name: 'images',
-      title: 'Imágenes',
-      type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
+      name: 'quote',
+      title: 'Testimonio del Cliente',
+      type: 'text',
+      rows: 3,
+    },
+    {
+      name: 'client',
+      title: 'Cliente',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'cover',
+      title: 'Imagen de Portada',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     },
     {
       name: 'publishedAt',
@@ -70,12 +102,13 @@ export const caseStudy = {
   preview: {
     select: {
       title: 'title',
+      industry: 'industry',
       client: 'client',
-      media: 'images.0',
+      media: 'cover',
     },
     prepare(selection: any) {
-      const { client } = selection
-      return { ...selection, subtitle: client && `Cliente: ${client}` }
+      const { title, industry, client } = selection
+      return { ...selection, subtitle: `${industry} - ${client}` }
     },
   },
 }

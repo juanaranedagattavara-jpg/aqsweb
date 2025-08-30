@@ -1,0 +1,83 @@
+{
+  "navigation": {
+    "home": "Home",
+    "product": "Product",
+    "consulting": "Consulting",
+    "pricing": "Pricing",
+    "cases": "Case Studies",
+    "resources": "Resources",
+    "company": "Company",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Analytics Quiet Storm",
+      "subtitle": "Transforming data into strategic decisions",
+      "description": "We are experts in data analytics and strategic consulting. We help companies make data-driven decisions to drive growth and innovation.",
+      "cta": "Get Started",
+      "secondaryCta": "Watch Demo"
+    },
+    "features": {
+      "title": "Why choose us",
+      "subtitle": "Analytics solutions that make a difference",
+      "items": [
+        {
+          "title": "Advanced Analytics",
+          "description": "We use the latest machine learning technologies to extract valuable insights from your data."
+        },
+        {
+          "title": "Expert Consulting",
+          "description": "Team of experts with over 10 years of experience in analytics and business strategy."
+        },
+        {
+          "title": "Measurable Results",
+          "description": "Every project includes clear KPIs and ROI reports to demonstrate the value generated."
+        }
+      ]
+    }
+  },
+  "pricing": {
+    "title": "Plans & Pricing",
+    "subtitle": "Choose the plan that best fits your needs",
+    "toggle": {
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "savings": "Save up to 20%"
+    },
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "description": "Perfect for startups and small businesses",
+        "monthlyPrice": "99",
+        "annualPrice": "79",
+        "cta": "Get Started"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Ideal for growing businesses",
+        "monthlyPrice": "299",
+        "annualPrice": "239",
+        "cta": "Get Started"
+      },
+      "premium": {
+        "name": "Premium",
+        "description": "For large companies and corporations",
+        "monthlyPrice": "599",
+        "annualPrice": "479",
+        "cta": "Talk to Sales"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's talk about your project",
+    "form": {
+      "name": "Full name",
+      "email": "Corporate email",
+      "company": "Company",
+      "message": "Tell us about your project",
+      "submit": "Send message",
+      "success": "Message sent successfully"
+    }
+  }
+}

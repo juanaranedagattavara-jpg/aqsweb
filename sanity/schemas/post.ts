@@ -28,8 +28,14 @@ export const post = {
     {
       name: 'author',
       title: 'Autor',
-      type: 'reference',
-      to: [{ type: 'team' }],
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'tags',
+      title: 'Etiquetas',
+      type: 'array',
+      of: [{ type: 'string' }],
     },
     {
       name: 'mainImage',
@@ -40,18 +46,12 @@ export const post = {
       },
     },
     {
-      name: 'categories',
-      title: 'Categorías',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'category' } }],
-    },
-    {
       name: 'publishedAt',
       title: 'Fecha de Publicación',
       type: 'datetime',
     },
     {
-      name: 'content',
+      name: 'body',
       title: 'Contenido',
       type: 'array',
       of: [
@@ -62,13 +62,27 @@ export const post = {
           type: 'image',
           options: { hotspot: true },
         },
+        {
+          type: 'code',
+          options: {
+            withFilename: true,
+          },
+        },
       ],
+    },
+    {
+      name: 'ogImage',
+      title: 'Imagen para Open Graph',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     },
   ],
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
+      author: 'author',
       media: 'mainImage',
     },
     prepare(selection: any) {

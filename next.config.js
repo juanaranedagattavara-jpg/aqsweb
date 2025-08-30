@@ -1,10 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true,
+    typedRoutes: true,
   },
   images: {
-    domains: ['cdn.sanity.io'],
+    domains: ['images.unsplash.com'],
+    formats: ['image/webp', 'image/avif'],
   },
   async headers() {
     return [
@@ -12,18 +13,19 @@ const nextConfig = {
         source: '/(.*)',
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
           },
         ],
+      },
+    ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/login',
+        destination: 'https://app.analyticsquietstorm.com',
+        permanent: true,
       },
     ]
   },
