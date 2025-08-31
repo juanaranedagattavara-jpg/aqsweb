@@ -2,21 +2,13 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { initPostHog, trackPageView } from '@/lib/analytics'
 
 export function Analytics() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Initialize PostHog
-    initPostHog()
-  }, [])
-
-  useEffect(() => {
-    // Track page views
-    if (pathname) {
-      trackPageView(pathname)
-    }
+    // Analytics will be implemented later
+    console.log('Analytics component mounted for path:', pathname)
   }, [pathname])
 
   return null

@@ -6,14 +6,14 @@ import Link from 'next/link'
 
 export function CTASection() {
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 text-white">
+    <section className="py-24 bg-gradient-to-br from-[#0A2540] via-[#113A63] to-[#0B1220] text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">
             ¿Listo para transformar tu negocio?
           </h2>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Únete a más de 500 empresas que ya están tomando decisiones 
+            Únete a más de 500 empresas que ya están tomando decisiones
             basadas en datos y viendo resultados extraordinarios.
           </p>
         </div>
@@ -30,7 +30,7 @@ export function CTASection() {
             </p>
             <Button
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-600"
+              className="border-white text-white hover:bg-white hover:text-[#0A2540]"
               asChild
             >
               <Link href="/demo">
@@ -51,7 +51,7 @@ export function CTASection() {
             </p>
             <Button
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-600"
+              className="border-white text-white hover:bg-white hover:text-[#0A2540]"
               asChild
             >
               <Link href="/planes">
@@ -72,7 +72,7 @@ export function CTASection() {
             </p>
             <Button
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-600"
+              className="border-white text-white hover:bg-white hover:text-[#0A2540]"
               asChild
             >
               <Link href="/contacto">
@@ -88,7 +88,7 @@ export function CTASection() {
           <div className="inline-flex flex-col sm:flex-row gap-4">
             <Button
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg"
+              className="bg-white text-[#0A2540] hover:bg-gray-100 px-8 py-4 text-lg"
               asChild
             >
               <Link href="/planes">
@@ -99,7 +99,7 @@ export function CTASection() {
             <Button
               variant="outline"
               size="lg"
-              className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg"
+              className="border-white text-white hover:bg-white hover:text-[#0A2540] px-8 py-4 text-lg"
               asChild
             >
               <Link href="/contacto">
@@ -107,7 +107,7 @@ export function CTASection() {
               </Link>
             </Button>
           </div>
-          
+
           <p className="text-blue-100 mt-6 text-sm">
             Sin tarjeta de crédito • Configuración en 5 minutos • Soporte 24/7
           </p>

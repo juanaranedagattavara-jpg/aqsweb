@@ -1,107 +1,131 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Menu, X, ChevronDown } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-
-const navigation = [
-  { name: 'Inicio', href: '/' },
-  { name: 'Producto', href: '/producto' },
-  { name: 'Consultoría', href: '/consultoria' },
-  { name: 'Precios', href: '/planes' },
-  { name: 'Casos de Éxito', href: '/casos' },
-  { name: 'Recursos', href: '/recursos' },
-  { name: 'Empresa', href: '/empresa' },
-  { name: 'Contacto', href: '/contacto' },
-]
+import { useState } from "react"
+import { ArrowRight, Menu, X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
-        <div className="flex w-full items-center justify-between py-6">
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">QSP</span>
-              </div>
-              <span className="text-xl font-bold text-gray-900">
-                Analytics Quiet Storm
-              </span>
-            </Link>
+    <header className="relative z-50">
+      {/* Navigation */}
+      <nav className="container mx-auto flex items-center justify-between px-4 py-4 mt-6">
+        <div className="flex items-center">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
+            <span className="font-bold">Q</span>
           </div>
-          
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
-              >
-                {item.name}
-              </Link>
-            ))}
+          <span className="ml-2 text-xl font-bold text-white">Analytics Quiet Storm</span>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-6">
+          <div className="flex items-center space-x-6">
+            <NavItem label="Características" hasDropdown />
+            <NavItem label="Soluciones" hasDropdown />
+            <NavItem label="Recursos" hasDropdown />
+            <NavItem label="Precios" />
           </div>
-          
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-4">
-            <Button variant="ghost" asChild>
-              <Link href="/contacto">Contacto</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/planes">Empezar ahora</Link>
-            </Button>
-          </div>
-          
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+          <div className="flex items-center space-x-3">
+            <button className="h-12 rounded-full bg-white px-8 text-base font-medium text-black hover:bg-white/90 transition-colors">
+              Login
+            </button>
           </div>
         </div>
-        
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden">
-            <div className="space-y-1 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-colors duration-200"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-            <div className="border-t border-gray-200 pb-3 pt-4">
-              <div className="space-y-2">
-                <Button variant="ghost" className="w-full justify-start" asChild>
-                  <Link href="/contacto" onClick={() => setMobileMenuOpen(false)}>
-                    Contacto
-                  </Link>
-                </Button>
-                <Button className="w-full justify-start" asChild>
-                  <Link href="/planes" onClick={() => setMobileMenuOpen(false)}>
-                    Empezar ahora
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
+
+        {/* Mobile menu button */}
+        <button
+          className="md:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <span className="sr-only">Toggle menu</span>
+          {mobileMenuOpen ? (
+            <X className="h-6 w-6 text-white" />
+          ) : (
+            <Menu className="h-6 w-6 text-white" />
+          )}
+        </button>
       </nav>
+
+      {/* Mobile Navigation Menu with animation */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex flex-col p-4 bg-black/95 md:hidden"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
+                  <span className="font-bold">Q</span>
+                </div>
+                <span className="ml-2 text-xl font-bold text-white">
+                  Analytics Quiet Storm
+                </span>
+              </div>
+              <button onClick={() => setMobileMenuOpen(false)}>
+                <X className="h-6 w-6 text-white" />
+              </button>
+            </div>
+            <div className="mt-8 flex flex-col space-y-6">
+              <MobileNavItem label="Características" />
+              <MobileNavItem label="Soluciones" />
+              <MobileNavItem label="Recursos" />
+              <MobileNavItem label="Precios" />
+              <div className="pt-4">
+                <button className="w-full justify-start border border-gray-700 text-white">
+                  Log in
+                </button>
+              </div>
+              <button className="h-12 rounded-full bg-white px-8 text-base font-medium text-black hover:bg-white/90">
+                Comenzar Gratis
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
+  )
+}
+
+function NavItem({
+  label,
+  hasDropdown,
+}: {
+  label: string
+  hasDropdown?: boolean
+}) {
+  return (
+    <div className="flex items-center text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">
+      <span>{label}</span>
+      {hasDropdown && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="ml-1"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      )}
+    </div>
+  )
+}
+
+function MobileNavItem({ label }: { label: string }) {
+  return (
+    <div className="flex items-center justify-between border-b border-gray-800 pb-2 text-lg text-white">
+      <span>{label}</span>
+      <ArrowRight className="h-4 w-4 text-gray-400" />
+    </div>
   )
 }

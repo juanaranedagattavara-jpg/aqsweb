@@ -1,29 +1,29 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Términos y Condiciones - QSP Analytics',
-  description: 'Términos y condiciones de uso de QSP Analytics.',
+  title: 'Soluciones para Empresas - QSP Analytics',
+  description: 'Soluciones empresariales completas de QSP Analytics para análisis de importaciones y exportaciones.',
 }
 
-export default function TerminosPage() {
+export default function SolucionesEmpresasPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0A2540] mb-8">
-            Términos y{' '}
+            Soluciones para{' '}
             <span className="bg-gradient-to-r from-[#2F81F7] to-[#E65C3D] bg-clip-text text-transparent">
-              Condiciones
+              Empresas
             </span>
           </h1>
           <p className="text-xl text-[#374151] max-w-3xl mx-auto leading-relaxed">
-            Condiciones de uso de nuestra plataforma
+            Soluciones empresariales completas para análisis de comercio internacional
           </p>
         </div>
         
         <div className="text-center">
           <p className="text-lg text-[#374151]">
-            Esta página está en desarrollo. Pronto tendrás acceso a nuestros términos y condiciones completos.
+            Esta página está en desarrollo. Pronto tendrás acceso a nuestras soluciones empresariales.
           </p>
         </div>
       </div>

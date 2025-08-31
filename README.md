@@ -1,291 +1,178 @@
-# Analytics Quiet Storm (QSP) - Sitio Web de Marketing
+# QSP - Plataforma de Inteligencia de Datos Premium
 
-Sitio web de marketing de nivel producción para Analytics Quiet Storm, una empresa especializada en análisis de datos y consultoría estratégica.
+Una landing page moderna y premium para QSP, construida con Next.js 14 y Tailwind CSS, diseñada para transmitir sofisticación y profesionalismo en el sector de inteligencia de datos.
 
 ## 🚀 Características
 
-- **Next.js 14** con App Router y TypeScript
-- **Tailwind CSS** + shadcn/ui + Lucide icons
-- **Internacionalización** con next-intl (ES/EN)
-- **SEO optimizado** con next-seo, sitemap, robots, schema.org
-- **Analytics** con GA4 + PostHog
-- **Formularios** con React Hook Form + Zod + server actions
-- **CMS dual**: Sanity (preferido) o Contentlayer MDX (fallback)
-- **Testing** con Vitest + React Testing Library + Playwright
-- **CI/CD** con GitHub Actions + deploy en Vercel
-- **Seguridad** con CSP, headers de seguridad, Turnstile/recaptcha
+- **Diseño Premium**: Estilo oscuro y sofisticado con glassmorphism y efectos de luz
+- **Responsive**: Completamente adaptable a todos los dispositivos
+- **Animaciones**: Transiciones suaves con Framer Motion
+- **Tipografías**: Playfair Display para títulos (serif elegante) e Inter para texto
+- **Componentes UI**: Sistema de componentes reutilizables y accesibles
+- **Performance**: Optimizado para velocidad y SEO
+
+## 🛠️ Stack Tecnológico
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS + @tailwindcss/typography + tailwind-scrollbar
+- **Animaciones**: Framer Motion
+- **Iconos**: Lucide React
+- **Tipografías**: Google Fonts (Playfair Display + Inter)
+- **Lenguaje**: TypeScript
+
+## 🎨 Paleta de Colores
+
+```ts
+primary: "#0B1220"        // Fondo principal oscuro
+primary-900: "#0E1A2A"    // Fondo secundario
+primary-800: "#11243A"    // Fondo terciario
+accent: "#3BA1FF"         // Azul principal
+accent-2: "#1EC9A3"       // Verde turquesa
+muted: "#8FA3BF"          // Texto secundario
+card: "rgba(255,255,255,0.06)"  // Tarjetas glassmorphism
+border: "rgba(255,255,255,0.12)" // Bordes sutiles
+warning: "#F5A524"        // Naranja/amarillo
+```
 
 ## 📁 Estructura del Proyecto
 
 ```
-/
 ├── app/                    # App Router de Next.js
-│   ├── [locale]/          # Rutas localizadas
-│   └── api/               # API routes
-├── components/             # Componentes React
-│   ├── ui/                # Componentes de UI (shadcn)
-│   ├── marketing/         # Componentes de marketing
-│   ├── pricing/           # Componentes de precios
-│   ├── cases/             # Componentes de casos de éxito
-│   ├── blog/              # Componentes del blog
-│   ├── forms/             # Componentes de formularios
-│   └── layout/            # Componentes de layout
-├── lib/                   # Utilidades y configuraciones
-├── sanity/                # Configuración de Sanity CMS
-├── content/               # Contenido MDX (Contentlayer)
-├── styles/                # Estilos globales
-├── tests/                 # Tests unitarios y E2E
-├── messages/              # Archivos de internacionalización
-└── public/                # Archivos estáticos
+│   ├── globals.css        # Estilos globales y configuración de Tailwind
+│   ├── layout.tsx         # Layout principal con tipografías
+│   └── page.tsx           # Página principal
+├── components/             # Componentes reutilizables
+│   ├── ui/                # Componentes base (Button, Card, Input)
+│   ├── layout/            # Header y Footer
+│   └── marketing/         # Componentes de marketing (Hero, Features, Stats)
+├── lib/                    # Utilidades y helpers
+├── tailwind.config.ts      # Configuración de Tailwind CSS
+└── package.json            # Dependencias del proyecto
 ```
 
-## 🛠️ Instalación
+## 🚀 Instalación
 
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com/juanaranedagattavara-jpg/aqsweb.git
-cd aqsweb
-```
+1. **Clonar el repositorio**
+   ```bash
+   git clone <repository-url>
+   cd qsp-premium-landing
+   ```
 
-### 2. Instalar dependencias
-```bash
-npm install
-```
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
 
-### 3. Configurar variables de entorno
-```bash
-cp .env.example .env.local
-```
+3. **Ejecutar en desarrollo**
+   ```bash
+   npm run dev
+   ```
 
-Editar `.env.local` con tus configuraciones:
-```env
-# Site Configuration
-SITE_URL=https://analyticsquietstorm.com
-NEXT_PUBLIC_SITE_URL=https://analyticsquietstorm.com
+4. **Construir para producción**
+   ```bash
+   npm run build
+   npm start
+   ```
 
-# Sanity CMS (opcional)
-NEXT_PUBLIC_SANITY_PROJECT_ID=tu_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+## 🎯 Componentes Principales
 
-# Analytics
-NEXT_PUBLIC_GA_ID=tu_ga_id
-NEXT_PUBLIC_POSTHOG_KEY=tu_posthog_key
-NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
+### Header
+- Navegación responsive con dropdowns
+- Barra de búsqueda integrada
+- Botones CTA prominentes
+- Efectos de glassmorphism
 
-# Email (Resend)
-RESEND_API_KEY=tu_resend_key
+### Hero Section
+- Título principal impactante
+- Descripción clara del producto
+- Elementos visuales animados (globo 3D, puntos de datos)
+- Botones de acción claros
 
-# Security (Cloudflare Turnstile)
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=tu_turnstile_key
-TURNSTILE_SECRET_KEY=tu_turnstile_secret
-```
+### Features
+- Grid de características con iconos
+- Efectos hover y animaciones
+- Diseño de tarjetas glassmorphism
 
-## 🚀 Scripts Disponibles
+### Stats
+- Estadísticas clave del producto
+- Iconos temáticos
+- Layout responsive
 
-- `npm run dev` - Iniciar servidor de desarrollo
-- `npm run build` - Construir para producción
-- `npm run start` - Iniciar servidor de producción
-- `npm run lint` - Ejecutar ESLint
-- `npm run type-check` - Verificar tipos de TypeScript
-- `npm run test` - Ejecutar tests unitarios
-- `npm run test:ui` - Ejecutar tests con UI
-- `npm run test:e2e` - Ejecutar tests E2E
-- `npm run test:e2e:ui` - Ejecutar tests E2E con UI
-- `npm run studio` - Iniciar Sanity Studio
-- `npm run studio:build` - Construir Sanity Studio
-- `npm run contentlayer` - Construir contenido MDX
-- `npm run sitemap` - Generar sitemap
-- `npm run lighthouse` - Ejecutar Lighthouse CI
-
-## 🌐 Rutas Disponibles
-
-- **Home** (`/`) - Página principal con propuesta de valor
-- **Producto** (`/producto`) - Descripción del producto
-- **Consultoría** (`/consultoria`) - Servicios de consultoría
-- **Precios** (`/planes`) - Planes con toggle mensual/anual
-- **Casos de Éxito** (`/casos`, `/casos/[slug]`) - Portfolio de proyectos
-- **Recursos** (`/recursos`, `/recursos/[slug]`) - Blog y guías
-- **Empresa** (`/empresa`) - Sobre nosotros
-- **Contacto** (`/contacto`) - Formulario de contacto
-- **Legal** - Políticas de privacidad, términos y cookies
-- **Status** (`/status`) - Estado del servicio
-
-## 💰 Reglas de Pricing
-
-### Planes Disponibles
-- **Básico (Azul)**: $99/mes - Features 1-5
-- **Pro (Teal)**: $299/mes - Features 1-8
-- **Premium (Dorado)**: $599/mes - Features 1-16
-
-### Feature Gating
-- Básico: items 1–5
-- Pro: items 1–8  
-- Premium: items 1–16
-
-### Toggle de Facturación
-- Mensual: precio completo
-- Anual: 20% de descuento
-
-## 📝 CMS (Sanity vs Contentlayer)
-
-### Sanity (Recomendado)
-Si configuras `NEXT_PUBLIC_SANITY_PROJECT_ID`, el sitio usará Sanity CMS.
-
-```bash
-npm run studio
-```
-
-### Contentlayer (Fallback)
-Si no configuras Sanity, el sitio usará MDX estático con Contentlayer.
-
-```bash
-npm run contentlayer
-```
-
-## 🧪 Testing
-
-### Tests Unitarios
-```bash
-npm run test
-```
-
-### Tests E2E
-```bash
-npm run test:e2e
-```
-
-### Lighthouse CI
-```bash
-npm run lighthouse
-```
-
-## 🔒 Seguridad
-
-- **Content Security Policy (CSP)** con nonce
-- **Headers de seguridad** (HSTS, XFO, XCTO, etc.)
-- **Turnstile/recaptcha** para formularios
-- **Validación** con Zod en todos los formularios
-- **Sanitización** de inputs
-
-## 📈 Analytics
-
-### Google Analytics 4
-- Tracking de páginas
-- Eventos personalizados
-- Conversiones
-
-### PostHog
-- Eventos de negocio
-- Funnel analysis
-- A/B testing
-
-## 🚀 Deployment
-
-### Vercel (Recomendado)
-1. Conectar repositorio a Vercel
-2. Configurar variables de entorno
-3. Deploy automático en push a main
-
-### GitHub Actions
-El proyecto incluye CI/CD completo:
-- Lint y type-check
-- Tests unitarios y E2E
-- Build y Lighthouse
-- Deploy automático
+### Footer
+- Enlaces organizados por categorías
+- Newsletter signup
+- Información de contacto
+- Enlaces sociales
 
 ## 🎨 Personalización
 
 ### Colores
-Los colores están definidos en `styles/tailwind.config.ts`:
-- **Básico**: Azul (#3b82f6)
-- **Pro**: Teal (#14b8a6)
-- **Premium**: Dorado (#f59e0b)
+Los colores se pueden personalizar en `tailwind.config.ts` en la sección `theme.extend.colors`.
+
+### Tipografías
+Las tipografías se configuran en `app/layout.tsx` y se aplican globalmente en `app/globals.css`.
 
 ### Componentes
-Los componentes están organizados por funcionalidad y son completamente personalizables.
+Todos los componentes están construidos con Tailwind CSS y son fácilmente personalizables modificando las clases CSS.
 
 ## 📱 Responsive Design
 
-- Mobile-first approach
-- Breakpoints optimizados
-- Touch-friendly interfaces
-- Performance optimizado para móvil
+El diseño es completamente responsive y se adapta a:
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
 
-## ♿ Accesibilidad
+## ⚡ Performance
 
-- **ARIA labels** y roles
-- **Skip links** para navegación por teclado
-- **Contraste AA** en todos los elementos
-- **Focus visible** en todos los elementos interactivos
-- **Screen reader** friendly
+- **Lazy Loading**: Componentes cargados bajo demanda
+- **Optimización de imágenes**: Next.js Image optimization
+- **Code Splitting**: Automático con Next.js
+- **CSS Purge**: Tailwind CSS purga automáticamente CSS no utilizado
 
-## 🔧 Desarrollo
+## 🔧 Scripts Disponibles
 
-### Estructura de Componentes
-```tsx
-// Ejemplo de componente
-import { Button } from '@/components/ui/button'
-import { trackEvent } from '@/lib/analytics'
-
-export function CTAButton({ children, ...props }) {
-  const handleClick = () => {
-    trackEvent('click_cta', { button: 'hero_cta' })
-  }
-  
-  return (
-    <Button onClick={handleClick} {...props}>
-      {children}
-    </Button>
-  )
+```json
+{
+  "dev": "next dev",           # Desarrollo local
+  "build": "next build",       # Construcción para producción
+  "start": "next start",       # Servidor de producción
+  "lint": "next lint"          # Linting del código
 }
 ```
 
-### Internacionalización
-```tsx
-import { useTranslations } from 'next-intl'
+## 🌟 Características del Diseño
 
-export function Hero() {
-  const t = useTranslations('home.hero')
-  
-  return (
-    <h1>{t('title')}</h1>
-  )
-}
-```
+### Glassmorphism
+- Efectos de desenfoque (backdrop-blur)
+- Transparencias sutiles
+- Bordes con opacidad reducida
 
-## 📊 Performance
+### Microinteracciones
+- Hover effects en botones y tarjetas
+- Transiciones suaves en todos los elementos
+- Estados focus accesibles
 
-### Core Web Vitals Targets
-- **LCP**: < 2.5s (mobile p75)
-- **CLS**: < 0.1
-- **TBT**: < 200ms
-
-### Optimizaciones
-- RSC + ISR
-- next/image con AVIF/WebP
-- Fuentes locales
-- Code splitting por ruta
-- Prefetch de rutas críticas
-
-## 🤝 Contribución
-
-1. Fork del repositorio
-2. Crear rama para feature (`git checkout -b feature/amazing-feature`)
-3. Commit de cambios (`git commit -m 'Add amazing feature'`)
-4. Push a la rama (`git push origin feature/amazing-feature`)
-5. Abrir Pull Request
+### Tipografía
+- **Títulos**: Playfair Display (serif elegante)
+- **Texto**: Inter (sans-serif legible)
+- **Jerarquía**: Tamaños y pesos bien definidos
 
 ## 📄 Licencia
 
-Este proyecto es privado y propiedad de Analytics Quiet Storm.
+Este proyecto es privado y está destinado exclusivamente para QSP.
 
-## 🆘 Soporte
+## 🤝 Contribución
 
-Para soporte técnico o preguntas:
-- Email: tech@analyticsquietstorm.com
-- Issues: [GitHub Issues](https://github.com/juanaranedagattavara-jpg/aqsweb/issues)
+Para contribuir al proyecto:
+1. Crear una rama feature
+2. Implementar cambios
+3. Crear un Pull Request
+4. Revisar y aprobar cambios
+
+## 📞 Soporte
+
+Para soporte técnico o preguntas sobre el proyecto, contactar al equipo de desarrollo de QSP.
 
 ---
 
-**Desarrollado con ❤️ por el equipo de Analytics Quiet Storm**
+**QSP** - Transformando datos en inteligencia empresarial

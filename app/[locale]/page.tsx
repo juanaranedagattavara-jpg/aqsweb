@@ -6,8 +6,15 @@ import { Stats } from '@/components/marketing/stats'
 import { CTASection } from '@/components/marketing/cta-section'
 
 export const metadata: Metadata = {
-  title: 'Analytics Quiet Storm - Transformamos datos en decisiones estratégicas',
-  description: 'Somos expertos en análisis de datos y consultoría estratégica. Ayudamos a empresas a tomar decisiones basadas en datos para impulsar el crecimiento y la innovación.',
+  title: 'QSP - Analytics Quiet Storm | Análisis de Importaciones y Exportaciones',
+  description: 'QSP es una solución pre-configurada de estadísticas de importaciones y exportaciones que transforma datos crudos de aduanas en información depurada, estandarizada y lista para análisis estratégico.',
+  keywords: 'analytics, importaciones, exportaciones, aduanas, datos, estadísticas, QSP, Analytics Quiet Storm',
+  openGraph: {
+    title: 'QSP - Analytics Quiet Storm | Análisis de Importaciones y Exportaciones',
+    description: 'Transformamos datos crudos de aduanas en información depurada, estandarizada y lista para análisis estratégico.',
+    type: 'website',
+    locale: 'es_ES',
+  },
 }
 
 export default function HomePage() {

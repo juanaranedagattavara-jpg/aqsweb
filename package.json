@@ -1,7 +1,7 @@
 {
-  "name": "analytics-quiet-storm",
+  "name": "qsp-premium-landing",
   "version": "1.0.0",
-  "description": "Sitio web de marketing para Analytics Quiet Storm",
+  "description": "Landing page premium para QSP con diseño oscuro y moderno",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,13 +12,12 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
     "@radix-ui/react-slot": "^1.2.3",
-    "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "framer-motion": "^10.18.0",
     "lucide-react": "^0.294.0",
     "next": "14.0.0",
-    "posthog-js": "^1.261.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.62.0",
@@ -33,6 +32,7 @@
     "eslint": "^8.52.0",
     "eslint-config-next": "14.0.0",
     "postcss": "^8.4.31",
+    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.2.2"
   }

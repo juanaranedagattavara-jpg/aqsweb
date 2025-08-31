@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Configuraciones para Docker
+  output: 'standalone',
   experimental: {
-    typedRoutes: true,
+    outputFileTracingRoot: undefined,
   },
+  
   images: {
     domains: ['images.unsplash.com'],
     formats: ['image/webp', 'image/avif'],
   },
+  
   async headers() {
     return [
       {
@@ -20,6 +24,7 @@ const nextConfig = {
       },
     ]
   },
+  
   async redirects() {
     return [
       {

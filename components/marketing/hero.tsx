@@ -1,106 +1,61 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Play, ArrowRight, Sparkles, BarChart3, TrendingUp } from 'lucide-react'
+import { ArrowRight } from "lucide-react"
 
 export function Hero() {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
-
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50 py-20 lg:py-32">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    <div className="relative min-h-screen overflow-hidden bg-black">
+      {/* Gradient background with grain effect */}
+      <div className="flex flex-col items-end absolute -right-60 -top-10 blur-xl z-0">
+        <div className="h-[10rem] rounded-full w-[60rem] z-1 bg-gradient-to-b blur-[6rem] from-accent to-accent-2"></div>
+        <div className="h-[10rem] rounded-full w-[90rem] z-1 bg-gradient-to-b blur-[6rem] from-primary-800 to-warning"></div>
+        <div className="h-[10rem] rounded-full w-[60rem] z-1 bg-gradient-to-b blur-[6rem] from-warning to-accent"></div>
       </div>
+      <div className="absolute inset-0 z-0 bg-noise opacity-30"></div>
 
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-8">
-            <Sparkles className="w-4 h-4 mr-2" />
-            Nueva funcionalidad: AI Analytics
-          </div>
-
-          {/* Main heading */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-            Transformamos{' '}
-            <span className="text-gradient bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-              datos
-            </span>{' '}
-            en decisiones estratégicas
-          </h1>
-
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Somos expertos en análisis de datos y consultoría estratégica. 
-            Ayudamos a empresas a tomar decisiones basadas en datos para 
-            impulsar el crecimiento y la innovación.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" className="text-lg px-8 py-4" asChild>
-              <Link href="/planes">
-                Empezar ahora
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            
-            <Button variant="outline" size="lg" className="text-lg px-8 py-4" asChild>
-              <Link href="/contacto">
-                <Play className="mr-2 h-5 w-5" />
-                Ver demo
-              </Link>
-            </Button>
-          </div>
-
-          {/* Trust indicators */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-gray-500">
-            <div className="flex items-center space-x-2">
-              <BarChart3 className="h-5 w-5" />
-              <span className="text-sm">+500 empresas confían en nosotros</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <TrendingUp className="h-5 w-5" />
-              <span className="text-sm">+40% ROI promedio</span>
-            </div>
-          </div>
+      {/* Content container */}
+      <div className="relative z-10">
+        {/* Badge */}
+        <div className="mx-auto mt-6 flex max-w-fit items-center justify-center space-x-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
+          <span className="text-sm font-medium text-white">
+            ¡Únete a la revolución del analytics hoy!
+          </span>
+          <ArrowRight className="h-4 w-4 text-white" />
         </div>
 
-        {/* Hero image/visual */}
-        <div className="mt-16 relative">
-          <div className="relative mx-auto max-w-5xl">
-            <div className="relative rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 p-1 shadow-2xl">
-              <div className="rounded-xl bg-white p-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="space-y-4">
-                    <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-4/5 animate-pulse"></div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/3 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse"></div>
-                  </div>
+        {/* Hero section */}
+        <div className="container mx-auto mt-12 px-4 text-center">
+          <h1 className="mx-auto max-w-4xl text-5xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
+            Poder de análisis con claridad de dashboard
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-300">
+            AQSWeb es una solución completa de dashboard que automatiza la recuperación de datos y ofrece opciones ilimitadas de presentación y distribución de dashboards, todo con el poder y la familiaridad de las herramientas de análisis modernas.
+          </p>
+          <div className="mt-10 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+            <button className="h-12 rounded-full bg-white px-8 text-base font-medium text-black hover:bg-white/90 transition-colors">
+              Comenzar Prueba Gratuita de 7 Días
+            </button>
+            <button className="h-12 rounded-full border border-gray-600 px-8 text-base font-medium text-white hover:bg-white/10 transition-colors">
+              Ver Demo
+            </button>
+          </div>
+
+          <div className="relative mx-auto my-20 w-full max-w-6xl">
+            <div className="absolute inset-0 rounded shadow-lg bg-white blur-[10rem] bg-grainy opacity-20" />
+
+            {/* Hero Image */}
+            <div className="relative w-full h-96 bg-gradient-to-br from-primary-800 to-primary-900 rounded-lg flex items-center justify-center shadow-md">
+              <div className="text-center">
+                <div className="w-24 h-24 bg-accent rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <span className="text-white text-4xl font-bold">Q</span>
                 </div>
-                <div className="mt-6 flex justify-center">
-                  <div className="w-32 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
-                </div>
+                <p className="text-white text-xl">Dashboard de Análisis AQSWeb</p>
+                <p className="text-gray-300 text-sm mt-2">Imagen representativa del sistema</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }

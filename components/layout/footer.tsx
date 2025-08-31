@@ -1,197 +1,235 @@
 'use client'
 
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { 
-  Twitter, 
-  Linkedin, 
-  Mail, 
-  Phone, 
-  MapPin,
-  ArrowUp 
-} from 'lucide-react'
-
-const footerNavigation = {
-  producto: [
-    { name: 'Características', href: '/producto' },
-    { name: 'Integraciones', href: '/producto#integraciones' },
-    { name: 'API', href: '/producto#api' },
-    { name: 'Documentación', href: '/docs' },
-  ],
-  empresa: [
-    { name: 'Sobre nosotros', href: '/empresa' },
-    { name: 'Equipo', href: '/empresa#equipo' },
-    { name: 'Carreras', href: '/carreras' },
-    { name: 'Prensa', href: '/prensa' },
-  ],
-  recursos: [
-    { name: 'Blog', href: '/recursos' },
-    { name: 'Casos de éxito', href: '/casos' },
-    { name: 'Webinars', href: '/webinars' },
-    { name: 'Whitepapers', href: '/whitepapers' },
-  ],
-  soporte: [
-    { name: 'Centro de ayuda', href: '/ayuda' },
-    { name: 'Contacto', href: '/contacto' },
-    { name: 'Estado del servicio', href: '/status' },
-    { name: 'Comunidad', href: '/comunidad' },
-  ],
-}
+import { Play, Star, Mail, Phone, MapPin, Twitter, Linkedin, Facebook, Instagram, ArrowRight } from 'lucide-react'
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Main footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
-          {/* Company info */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">QSP</span>
+    <footer className="bg-primary-900/50 border-t border-border">
+      {/* Top Section */}
+      <section className="py-16 border-b border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0">
+            <div className="flex items-center space-x-8">
+              <button 
+                className="flex items-center space-x-2 text-white hover:text-accent transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900 rounded-lg px-2 py-1"
+                aria-label="Ver demostración del producto"
+              >
+                <Play className="w-5 h-5" />
+                <span>Ver demo</span>
+              </button>
+              <div className="flex items-center space-x-2">
+                <div className="flex space-x-1" role="img" aria-label="5 estrellas de calificación">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-warning fill-current" />
+                  ))}
+                </div>
+                <span className="text-muted text-sm">1,000+ reseñas</span>
               </div>
-              <span className="text-xl font-bold">Analytics Quiet Storm</span>
-            </Link>
-            <p className="text-gray-300 mb-4 max-w-md">
-              Transformamos datos en decisiones estratégicas. Somos expertos en análisis 
-              de datos y consultoría estratégica.
-            </p>
-            <div className="flex space-x-4">
-              <Link href="https://twitter.com/analyticsquietstorm" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link href="https://linkedin.com/company/analyticsquietstorm" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Link>
-              <Link href="mailto:info@analyticsquietstorm.com" className="text-gray-400 hover:text-white transition-colors">
-                <Mail className="h-5 w-5" />
-                <span className="sr-only">Email</span>
-              </Link>
+              <a 
+                href="#platform" 
+                className="inline-flex items-center space-x-2 text-white hover:text-accent transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900 rounded-lg px-2 py-1"
+                aria-label="Explorar plataforma de analytics"
+              >
+                <span>Explora Nuestra Plataforma de Analytics Avanzado</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
-          </div>
-
-          {/* Navigation sections */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">
-              Producto
-            </h3>
-            <ul className="space-y-3">
-              {footerNavigation.producto.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">
-              Empresa
-            </h3>
-            <ul className="space-y-3">
-              {footerNavigation.empresa.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">
-              Recursos
-            </h3>
-            <ul className="space-y-3">
-              {footerNavigation.recursos.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">
-              Soporte
-            </h3>
-            <ul className="space-y-3">
-              {footerNavigation.soporte.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <a 
+              href="#samples" 
+              className="inline-flex items-center space-x-2 text-white hover:text-accent transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900 rounded-lg px-2 py-1"
+              aria-label="Obtener muestras de datos"
+            >
+              <span>Obtener Muestras de Datos de Comercio Global</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
+      </section>
 
-        {/* Contact info */}
-        <div className="border-t border-gray-800 pt-8 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-center space-x-3">
-              <Mail className="h-5 w-5 text-blue-400" />
-              <div>
-                <p className="text-sm font-medium">Email</p>
-                <p className="text-gray-400">info@analyticsquietstorm.com</p>
+      {/* Main Footer Content */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+            {/* Company Info */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">Q</span>
+                </div>
+                <span className="text-white font-display text-xl font-semibold">Analytics Quiet Storm</span>
+              </div>
+              <p className="text-muted mb-6 max-w-md">
+                Somos expertos en análisis de datos y consultoría estratégica. Ayudamos a empresas a tomar decisiones basadas en datos para impulsar el crecimiento y la innovación.
+              </p>
+              <div className="space-y-3">
+                <a 
+                  href="mailto:contacto@analyticsquietstorm.com"
+                  className="flex items-center space-x-3 text-muted hover:text-accent transition-colors"
+                  aria-label="Enviar email a contacto@analyticsquietstorm.com"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>contacto@analyticsquietstorm.com</span>
+                </a>
+                <a 
+                  href="tel:+15551234567"
+                  className="flex items-center space-x-3 text-muted hover:text-accent transition-colors"
+                  aria-label="Llamar al +1 (555) 123-4567"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>+1 (555) 123-4567</span>
+                </a>
+                <div className="flex items-center space-x-3 text-muted">
+                  <MapPin className="w-4 h-4" />
+                  <span>San Francisco, CA</span>
+                </div>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <Phone className="h-5 w-5 text-blue-400" />
-              <div>
-                <p className="text-sm font-medium">Teléfono</p>
-                <p className="text-gray-400">+34 XXX XXX XXX</p>
-              </div>
+
+            {/* Product Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-6">Producto</h3>
+              <ul className="space-y-3">
+                {[
+                  { href: '#features', label: 'Características' },
+                  { href: '#solutions', label: 'Soluciones' },
+                  { href: '#pricing', label: 'Precios' },
+                  { href: '#api', label: 'API' },
+                  { href: '#docs', label: 'Documentación' }
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a 
+                      href={link.href} 
+                      className="text-muted hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900 rounded px-1 py-0.5"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="flex items-center space-x-3">
-              <MapPin className="h-5 w-5 text-blue-400" />
-              <div>
-                <p className="text-sm font-medium">Ubicación</p>
-                <p className="text-gray-400">España</p>
-              </div>
+
+            {/* Company Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-6">Empresa</h3>
+              <ul className="space-y-3">
+                {[
+                  { href: '#about', label: 'Acerca de' },
+                  { href: '#blog', label: 'Blog' },
+                  { href: '#careers', label: 'Carreras' },
+                  { href: '#press', label: 'Prensa' },
+                  { href: '#contact', label: 'Contacto' }
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a 
+                      href={link.href} 
+                      className="text-muted hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900 rounded px-1 py-0.5"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-6">Recursos</h3>
+              <ul className="space-y-3">
+                {[
+                  { href: '#help', label: 'Centro de Ayuda' },
+                  { href: '#community', label: 'Comunidad' },
+                  { href: '#webinars', label: 'Webinars' },
+                  { href: '#events', label: 'Eventos' },
+                  { href: '#support', label: 'Soporte' }
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a 
+                      href={link.href} 
+                      className="text-muted hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900 rounded px-1 py-0.5"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Legal Links */}
+            <div>
+              <h3 className="text-white font-semibold mb-6">Legal</h3>
+              <ul className="space-y-3">
+                {[
+                  { href: '#privacy', label: 'Privacidad' },
+                  { href: '#terms', label: 'Términos' },
+                  { href: '#cookies', label: 'Cookies' },
+                  { href: '#licenses', label: 'Licencias' },
+                  { href: '#security', label: 'Seguridad' }
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a 
+                      href={link.href} 
+                      className="text-muted hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900 rounded px-1 py-0.5"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Newsletter Section */}
+          <div className="mt-16 pt-8 border-t border-border">
+            <div className="max-w-2xl">
+              <h3 className="text-white font-semibold mb-4">Mantente actualizado</h3>
+              <p className="text-muted mb-6">Recibe las últimas noticias sobre analytics y actualizaciones de la plataforma.</p>
+              <form className="flex flex-col sm:flex-row gap-4" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="Tu correo electrónico"
+                  className="flex-1 px-4 py-3 bg-primary-800 border border-border rounded-2xl text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                  aria-label="Correo electrónico para suscripción"
+                  required
+                />
+                <button 
+                  type="submit"
+                  className="bg-gradient-to-r from-accent to-accent-2 text-white font-bold px-6 py-3 rounded-2xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900"
+                >
+                  Suscribirse
+                </button>
+              </form>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Bottom section */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © 2024 Analytics Quiet Storm. Todos los derechos reservados.
-          </div>
-          <div className="flex space-x-6 text-sm">
-            <Link href="/legal/privacidad" className="text-gray-400 hover:text-white transition-colors">
-              Privacidad
-            </Link>
-            <Link href="/legal/terminos" className="text-gray-400 hover:text-white transition-colors">
-              Términos
-            </Link>
-            <Link href="/legal/cookies" className="text-gray-400 hover:text-white transition-colors">
-              Cookies
-            </Link>
+      {/* Bottom Section */}
+      <section className="py-8 border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-6">
+              <span className="text-muted text-sm">© 2024 Analytics Quiet Storm. Todos los derechos reservados.</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              {[
+                { icon: Twitter, href: '#', label: 'Twitter' },
+                { icon: Linkedin, href: '#', label: 'LinkedIn' },
+                { icon: Facebook, href: '#', label: 'Facebook' },
+                { icon: Instagram, href: '#', label: 'Instagram' }
+              ].map((social) => (
+                <a 
+                  key={social.label}
+                  href={social.href} 
+                  className="w-10 h-10 bg-primary-800 rounded-lg flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary-900" 
+                  aria-label={`Síguenos en ${social.label}`}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Scroll to top button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
-        aria-label="Volver arriba"
-      >
-        <ArrowUp className="h-5 w-5" />
-      </button>
+      </section>
     </footer>
   )
 }

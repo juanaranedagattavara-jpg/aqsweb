@@ -1,89 +1,80 @@
 'use client'
 
-import { TrendingUp, Users, Target, Award } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { TrendingUp, Users, Globe, Zap } from 'lucide-react'
 
-const stats = [
+interface StatItem {
+  icon: React.ComponentType<{ className?: string }>
+  value: string
+  label: string
+  color: string
+}
+
+const stats: StatItem[] = [
   {
     icon: TrendingUp,
-    value: '+500',
-    label: 'Empresas confían en nosotros',
-    description: 'Desde startups hasta Fortune 500',
-    color: 'from-blue-500 to-blue-600'
+    value: "98%",
+    label: "Precisión en Datos",
+    color: "text-accent"
   },
   {
     icon: Users,
-    value: '+10,000',
-    label: 'Usuarios activos',
-    description: 'En más de 50 países',
-    color: 'from-green-500 to-green-600'
+    value: "10K+",
+    label: "Usuarios Activos",
+    color: "text-accent-2"
   },
   {
-    icon: Target,
-    value: '+40%',
-    label: 'ROI promedio',
-    description: 'Mejora en resultados de negocio',
-    color: 'from-purple-500 to-purple-600'
+    icon: Globe,
+    value: "150+",
+    label: "Países Cubiertos",
+    color: "text-warning"
   },
   {
-    icon: Award,
-    value: '99.9%',
-    label: 'Uptime garantizado',
-    description: 'Disponibilidad del servicio',
-    color: 'from-orange-500 to-orange-600'
+    icon: Zap,
+    value: "<100ms",
+    label: "Latencia Promedio",
+    color: "text-accent"
   }
 ]
 
 export function Stats() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="py-20 bg-primary-900/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Números que hablan por sí solos
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl lg:text-5xl font-display font-bold text-white mb-6">
+            Números que Hablan por Sí Solos
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Nuestro impacto medido en resultados tangibles y crecimiento empresarial.
+          <p className="text-xl text-muted max-w-3xl mx-auto">
+            Nuestra plataforma ha transformado la forma en que las empresas acceden y analizan datos globales.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group relative p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
             >
-              {/* Icon */}
-              <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${stat.color} text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                <stat.icon className="h-8 w-8" />
+              <div className="card p-8 text-center">
+                <div className={`w-16 h-16 mx-auto mb-6 bg-primary-800 rounded-2xl flex items-center justify-center ${stat.color}`}>
+                  <stat.icon className="w-8 h-8" />
+                </div>
+                <div className="text-3xl lg:text-4xl font-display font-bold text-white mb-2">{stat.value}</div>
+                <p className="text-muted text-sm lg:text-base">{stat.label}</p>
               </div>
-
-              {/* Value */}
-              <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-                {stat.value}
-              </div>
-
-              {/* Label */}
-              <div className="text-lg font-semibold text-gray-700 mb-3">
-                {stat.label}
-              </div>
-
-              {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {stat.description}
-              </p>
-
-              {/* Hover effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
-        {/* Additional CTA */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
-            <TrendingUp className="w-5 h-5 mr-2" />
-            Ver más casos de éxito
-          </div>
         </div>
       </div>
     </section>
