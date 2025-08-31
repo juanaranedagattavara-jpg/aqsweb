@@ -53,22 +53,22 @@ function NavItem({ item, isOpen, onToggle, onClose }: {
 
   // Si hay items, es un menú desplegable
   return (
-    <div className="relative">
-      <button
+                  <div className="relative">
+                    <button
         onClick={onToggle}
         className="flex items-center space-x-1 px-4 py-2 text-gray-200 hover:text-white transition-colors"
-      >
-        <span>{item.label}</span>
+                    >
+                      <span>{item.label}</span>
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
-      
-      <AnimatePresence>
+                    </button>
+                    
+                    <AnimatePresence>
         {isOpen && (
-          <motion.div
+                        <motion.div
             initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+                          animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+                          transition={{ duration: 0.2 }}
             className="absolute top-full left-0 w-64 bg-white border border-gray-200 rounded-lg shadow-xl z-50"
             onMouseLeave={onClose}
           >
@@ -81,13 +81,13 @@ function NavItem({ item, isOpen, onToggle, onClose }: {
                   onClick={onClose}
                 >
                   {subItem.label}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+                              </a>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
   )
 }
 
@@ -159,7 +159,7 @@ export function Header() {
             </div>
             <span className="text-xl font-bold text-white">QSP Analytics</span>
           </a>
-        </div>
+          </div>
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-8">
@@ -172,7 +172,7 @@ export function Header() {
               onClose={closeAllMenus}
             />
           ))}
-        </div>
+          </div>
 
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center space-x-4">
@@ -182,6 +182,10 @@ export function Header() {
           >
             Login
           </a>
+          <button className="px-6 py-2 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center space-x-2">
+            <span>Solicita una demo</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Mobile menu button */}
@@ -221,6 +225,10 @@ export function Header() {
                 >
                   Login
                 </a>
+                <button className="w-full mt-3 px-6 py-3 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center justify-center space-x-2">
+                  <span>Solicita una demo</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </motion.div>

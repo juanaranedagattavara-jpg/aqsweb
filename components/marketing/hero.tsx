@@ -15,16 +15,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-32 max-w-5xl">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center px-4 py-2 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-400 text-sm font-medium mb-8"
-        >
-          <span>🚀 Transforma tu comercio exterior</span>
-          <ArrowRight className="ml-2 w-4 h-4" />
-        </motion.div>
+
 
         {/* Hero section */}
         <div className="text-center max-w-4xl mx-auto">
@@ -58,7 +49,7 @@ export function Hero() {
             <button className="group relative px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary-500/25">
               Descubre cómo anticiparte al mercado
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+              </button>
           </motion.div>
         </div>
 
@@ -69,21 +60,26 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-20 flex justify-center"
         >
-          <div className="relative w-full max-w-4xl">
+          <div className="relative w-full max-w-6xl">
             <a 
               href="/dashboard" 
               className="block group transition-transform duration-300 hover:scale-105"
             >
               <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-2xl p-8 border border-gray-700 shadow-2xl hover:shadow-primary-500/25 transition-all duration-300 group-hover:border-primary-500/50">
-                <div className="bg-noise rounded-xl p-12 text-center">
-                  <div className="w-24 h-24 bg-primary-500/20 rounded-full mx-auto mb-6 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors duration-300">
-                    <span className="text-4xl font-bold text-primary-400 group-hover:text-primary-300 transition-colors duration-300">Q</span>
+                <div className="bg-white rounded-xl p-6 text-center">
+                  <h3 className="text-xl font-bold text-gray-800 mb-6">Cambios en el posicionamiento de las empresas</h3>
+                  
+                  {/* Imagen del gráfico */}
+                  <div className="flex justify-center mb-4">
+                    <img 
+                      src="img/8badbfb8-a048-4771-b348-bb340d670d8a.png" 
+                      alt="Gráfico de cambios en el posicionamiento de las empresas (2010-2025)" 
+                      className="w-full max-w-4xl h-auto rounded-lg shadow-lg"
+                    />
                   </div>
-                  <p className="text-gray-400 text-lg group-hover:text-gray-300 transition-colors duration-300">
-                    Dashboard de análisis de comercio exterior
-                  </p>
-                  <div className="mt-4 flex items-center justify-center space-x-2 text-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-sm font-medium">Haz clic para explorar</span>
+                  
+                  <div className="mt-4 flex items-center justify-center space-x-2 text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium">Haz clic para explorar el Dashboard completo</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                 </div>

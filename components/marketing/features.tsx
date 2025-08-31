@@ -282,9 +282,9 @@ export function Features() {
             Lo entendemos. Eres un <strong>profesional del análisis</strong>—un maestro de fórmulas, filtros y tablas dinámicas. Pero, con datos dispersos en herramientas, errores esperando suceder, y gráficos que apenas pasan como "intuitivos", es hora de que tus dashboards den un paso adelante.
           </p>
         </motion.div>
-
+        
         {/* Three Steps Section */}
-        <motion.div
+            <motion.div
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
@@ -409,9 +409,9 @@ export function Features() {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
-        </motion.div>
+                </div>
+              </div>
+            </motion.div>
 
         {/* Dashboard Examples */}
         <motion.div
@@ -447,8 +447,8 @@ export function Features() {
                   <BarChart3 className="w-8 h-8 text-accent" />
                 </div>
               </div>
-            ))}
-          </div>
+          ))}
+        </div>
         </motion.div>
 
         {/* Stats Section */}
