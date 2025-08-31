@@ -70,16 +70,25 @@ export function Hero() {
           className="mt-20 flex justify-center"
         >
           <div className="relative w-full max-w-4xl">
-            <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-2xl p-8 border border-gray-700 shadow-2xl">
-              <div className="bg-noise rounded-xl p-12 text-center">
-                <div className="w-24 h-24 bg-primary-500/20 rounded-full mx-auto mb-6 flex items-center justify-center">
-                  <span className="text-4xl font-bold text-primary-400">Q</span>
+            <a 
+              href="/dashboard" 
+              className="block group transition-transform duration-300 hover:scale-105"
+            >
+              <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-2xl p-8 border border-gray-700 shadow-2xl hover:shadow-primary-500/25 transition-all duration-300 group-hover:border-primary-500/50">
+                <div className="bg-noise rounded-xl p-12 text-center">
+                  <div className="w-24 h-24 bg-primary-500/20 rounded-full mx-auto mb-6 flex items-center justify-center group-hover:bg-primary-500/30 transition-colors duration-300">
+                    <span className="text-4xl font-bold text-primary-400 group-hover:text-primary-300 transition-colors duration-300">Q</span>
+                  </div>
+                  <p className="text-gray-400 text-lg group-hover:text-gray-300 transition-colors duration-300">
+                    Dashboard de análisis de comercio exterior
+                  </p>
+                  <div className="mt-4 flex items-center justify-center space-x-2 text-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-sm font-medium">Haz clic para explorar</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  </div>
                 </div>
-                <p className="text-gray-400 text-lg">
-                  Dashboard de análisis de comercio exterior
-                </p>
               </div>
-            </div>
+            </a>
           </div>
         </motion.div>
       </div>

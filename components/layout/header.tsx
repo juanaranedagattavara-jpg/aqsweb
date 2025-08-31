@@ -9,6 +9,7 @@ const menuItems = [
     label: "Características",
     href: "#",
     items: [
+      { label: "Dashboard", href: "/dashboard" },
       { label: "Dashboards Interactivos", href: "#" },
       { label: "Datos Limpios y Estandarizados", href: "#" },
       { label: "Proyecciones de Mercado", href: "#" },
