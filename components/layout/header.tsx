@@ -6,27 +6,14 @@ import { motion, AnimatePresence } from "framer-motion"
 
 const menuItems = [
   {
-    label: "Características",
-    href: "#",
-    items: [
-      { label: "Dashboard", href: "/dashboard" },
-      { label: "Dashboards Interactivos", href: "#" },
-      { label: "Datos Limpios y Estandarizados", href: "#" },
-      { label: "Proyecciones de Mercado", href: "#" },
-      { label: "Comparación Competitiva", href: "#" },
-      { label: "Alertas Estratégicas", href: "#" }
-    ]
+    label: "Dashboard",
+    href: "/dashboard",
+    items: []
   },
   {
-    label: "Soluciones",
-    href: "#",
-    items: [
-      { label: "Análisis de Demanda Internacional", href: "#" },
-      { label: "Estrategia Comercial", href: "#" },
-      { label: "Gestión de Riesgos", href: "#" },
-      { label: "Optimización de Exportaciones", href: "#" },
-      { label: "Casos de Uso por Industria", href: "#" }
-    ]
+    label: "Planes",
+    href: "/precios",
+    items: []
   },
   {
     label: "Recursos",
@@ -40,13 +27,9 @@ const menuItems = [
     ]
   },
   {
-    label: "Precios",
-    href: "/precios",
-    items: [
-      { label: "Planes", href: "/precios" },
-      { label: "Comparación de Planes", href: "/precios" },
-      { label: "Preguntas Frecuentes", href: "/precios" }
-    ]
+    label: "Blog",
+    href: "#",
+    items: []
   }
 ]
 
@@ -56,6 +39,19 @@ function NavItem({ item, isOpen, onToggle, onClose }: {
   onToggle: () => void
   onClose: () => void
 }) {
+  // Si no hay items, es un enlace simple
+  if (item.items.length === 0) {
+    return (
+      <a
+        href={item.href}
+        className="px-4 py-2 text-gray-200 hover:text-white transition-colors"
+      >
+        {item.label}
+      </a>
+    )
+  }
+
+  // Si hay items, es un menú desplegable
   return (
     <div className="relative">
       <button
