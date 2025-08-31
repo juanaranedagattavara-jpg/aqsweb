@@ -1,7 +1,10 @@
 import { Header } from '@/components/layout/header'
 import { Hero } from '@/components/marketing/hero'
-import { Features } from '@/components/marketing/features'
-import { Stats } from '@/components/marketing/stats'
+import { Benefits } from '@/components/marketing/benefits'
+import { Differentiation } from '@/components/marketing/differentiation'
+import { Vision } from '@/components/marketing/vision'
+import { UseCases } from '@/components/marketing/use-cases'
+import { FinalCTA } from '@/components/marketing/final-cta'
 import { Footer } from '@/components/layout/footer'
 
 export default function HomePage() {
@@ -10,8 +13,11 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
-        <Features />
-        <Stats />
+        <Benefits />
+        <Differentiation />
+        <Vision />
+        <UseCases />
+        <FinalCTA />
       </main>
       <Footer />
     </div>

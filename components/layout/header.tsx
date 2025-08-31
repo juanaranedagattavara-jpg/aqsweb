@@ -1,131 +1,242 @@
 'use client'
 
 import { useState } from "react"
-import { ArrowRight, Menu, X } from "lucide-react"
+import { ArrowRight, Menu, X, ChevronDown } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+
+const menuItems = [
+  {
+    label: "Características",
+    href: "#",
+    items: [
+      { label: "Dashboards Interactivos", href: "#" },
+      { label: "Datos Limpios y Estandarizados", href: "#" },
+      { label: "Proyecciones de Mercado", href: "#" },
+      { label: "Comparación Competitiva", href: "#" },
+      { label: "Alertas Estratégicas", href: "#" }
+    ]
+  },
+  {
+    label: "Soluciones",
+    href: "#",
+    items: [
+      { label: "Análisis de Demanda Internacional", href: "#" },
+      { label: "Estrategia Comercial", href: "#" },
+      { label: "Gestión de Riesgos", href: "#" },
+      { label: "Optimización de Exportaciones", href: "#" },
+      { label: "Casos de Uso por Industria", href: "#" }
+    ]
+  },
+  {
+    label: "Recursos",
+    href: "#",
+    items: [
+      { label: "Casos de Éxito", href: "#" },
+      { label: "Estudios de Mercado", href: "#" },
+      { label: "Guías y Whitepapers", href: "#" },
+      { label: "Blog", href: "#" },
+      { label: "Webinars & Eventos", href: "#" }
+    ]
+  },
+  {
+    label: "Precios",
+    href: "/precios",
+    items: [
+      { label: "Planes", href: "/precios" },
+      { label: "Comparación de Planes", href: "/precios" },
+      { label: "Preguntas Frecuentes", href: "/precios" }
+    ]
+  }
+]
+
+function NavItem({ item, isOpen, onToggle, onClose }: { 
+  item: typeof menuItems[0]
+  isOpen: boolean
+  onToggle: () => void
+  onClose: () => void
+}) {
+  return (
+    <div className="relative">
+      <button
+        onClick={onToggle}
+        className="flex items-center space-x-1 px-4 py-2 text-gray-200 hover:text-white transition-colors"
+      >
+        <span>{item.label}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 w-64 bg-white border border-gray-200 rounded-lg shadow-xl z-50"
+            onMouseLeave={onClose}
+          >
+            <div className="py-2">
+              {item.items.map((subItem, index) => (
+                <a
+                  key={index}
+                  href={subItem.href}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors"
+                  onClick={onClose}
+                >
+                  {subItem.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function MobileNavItem({ item, isOpen, onToggle }: { 
+  item: typeof menuItems[0]
+  isOpen: boolean
+  onToggle: () => void
+}) {
+  return (
+    <div>
+      <button
+        onClick={onToggle}
+        className="flex items-center justify-between w-full px-4 py-3 text-left text-gray-200 hover:text-white transition-colors"
+      >
+        <span>{item.label}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="bg-gray-800"
+          >
+            {item.items.map((subItem, index) => (
+              <a
+                key={index}
+                href={subItem.href}
+                className="block px-8 py-2 text-gray-400 hover:text-white transition-colors"
+              >
+                {subItem.label}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null)
+
+  const handleMenuToggle = (index: number) => {
+    if (openMenuIndex === index) {
+      setOpenMenuIndex(null)
+    } else {
+      setOpenMenuIndex(index)
+    }
+  }
+
+  const closeAllMenus = () => {
+    setOpenMenuIndex(null)
+  }
 
   return (
-    <header className="relative z-50">
+    <header className="sticky top-0 z-50 bg-[#0A2540] border-b border-blue-900 shadow-lg">
       {/* Navigation */}
-      <nav className="container mx-auto flex items-center justify-between px-4 py-4 mt-6">
+      <nav className="container mx-auto flex items-center justify-between px-4 py-4">
         <div className="flex items-center">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
-            <span className="font-bold">Q</span>
-          </div>
-          <span className="ml-2 text-xl font-bold text-white">Analytics Quiet Storm</span>
+          {/* Logo */}
+          <a href="/" className="flex items-center space-x-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#0A2540] font-bold text-xl">
+              Q
+            </div>
+            <span className="text-xl font-bold text-white">QSP Analytics</span>
+          </a>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
-          <div className="flex items-center space-x-6">
-            <NavItem label="Características" hasDropdown />
-            <NavItem label="Soluciones" hasDropdown />
-            <NavItem label="Recursos" hasDropdown />
-            <NavItem label="Precios" />
-          </div>
-          <div className="flex items-center space-x-3">
-            <button className="h-12 rounded-full bg-white px-8 text-base font-medium text-black hover:bg-white/90 transition-colors">
-              Login
-            </button>
-          </div>
+        <div className="hidden lg:flex items-center space-x-8">
+          {menuItems.map((item, index) => (
+            <NavItem 
+              key={item.label} 
+              item={item} 
+              isOpen={openMenuIndex === index}
+              onToggle={() => handleMenuToggle(index)}
+              onClose={closeAllMenus}
+            />
+          ))}
+        </div>
+
+        {/* Desktop Actions */}
+        <div className="hidden lg:flex items-center space-x-4">
+          <a
+            href="#"
+            className="text-gray-200 hover:text-white transition-colors"
+          >
+            Login
+          </a>
+          <button className="px-6 py-2 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center space-x-2">
+            <span>Solicita una demo</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="lg:hidden p-2 text-gray-200 hover:text-white transition-colors"
         >
-          <span className="sr-only">Toggle menu</span>
-          {mobileMenuOpen ? (
-            <X className="h-6 w-6 text-white" />
-          ) : (
-            <Menu className="h-6 w-6 text-white" />
-          )}
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </nav>
 
-      {/* Mobile Navigation Menu with animation */}
+      {/* Mobile Navigation */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex flex-col p-4 bg-black/95 md:hidden"
+            className="lg:hidden bg-[#0A2540] border-t border-blue-900"
           >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-black">
-                  <span className="font-bold">Q</span>
-                </div>
-                <span className="ml-2 text-xl font-bold text-white">
-                  Analytics Quiet Storm
-                </span>
-              </div>
-              <button onClick={() => setMobileMenuOpen(false)}>
-                <X className="h-6 w-6 text-white" />
-              </button>
-            </div>
-            <div className="mt-8 flex flex-col space-y-6">
-              <MobileNavItem label="Características" />
-              <MobileNavItem label="Soluciones" />
-              <MobileNavItem label="Recursos" />
-              <MobileNavItem label="Precios" />
-              <div className="pt-4">
-                <button className="w-full justify-start border border-gray-700 text-white">
-                  Log in
+            <div className="container mx-auto px-4 py-4">
+              {menuItems.map((item, index) => (
+                <MobileNavItem 
+                  key={item.label} 
+                  item={item} 
+                  isOpen={openMenuIndex === index}
+                  onToggle={() => handleMenuToggle(index)}
+                />
+              ))}
+              
+              {/* Mobile Actions */}
+              <div className="mt-6 pt-6 border-t border-blue-900">
+                <a
+                  href="#"
+                  className="block px-4 py-3 text-gray-200 hover:text-white transition-colors"
+                >
+                  Login
+                </a>
+                <button className="w-full mt-3 px-6 py-3 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center justify-center space-x-2">
+                  <span>Solicita una demo</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
-              <button className="h-12 rounded-full bg-white px-8 text-base font-medium text-black hover:bg-white/90">
-                Comenzar Gratis
-              </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
-  )
-}
-
-function NavItem({
-  label,
-  hasDropdown,
-}: {
-  label: string
-  hasDropdown?: boolean
-}) {
-  return (
-    <div className="flex items-center text-sm text-gray-300 hover:text-white transition-colors cursor-pointer">
-      <span>{label}</span>
-      {hasDropdown && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="ml-1"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      )}
-    </div>
-  )
-}
-
-function MobileNavItem({ label }: { label: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-gray-800 pb-2 text-lg text-white">
-      <span>{label}</span>
-      <ArrowRight className="h-4 w-4 text-gray-400" />
-    </div>
   )
 }
