@@ -182,10 +182,6 @@ export function Header() {
           >
             Login
           </a>
-          <button className="px-6 py-2 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center space-x-2">
-            <span>Solicita una demo</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
         </div>
 
         {/* Mobile menu button */}
@@ -225,10 +221,6 @@ export function Header() {
                 >
                   Login
                 </a>
-                <button className="w-full mt-3 px-6 py-3 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center justify-center space-x-2">
-                  <span>Solicita una demo</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
               </div>
             </div>
           </motion.div>
