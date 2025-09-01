@@ -22,13 +22,13 @@ const menuItems = [
       { label: "Casos de Éxito", href: "#" },
       { label: "Estudios de Mercado", href: "#" },
       { label: "Guías y Whitepapers", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "Blog", href: "/blog" },
       { label: "Webinars & Eventos", href: "#" }
     ]
   },
   {
-    label: "Blog",
-    href: "#",
+    label: "Newsletter",
+    href: "/newsletter",
     items: []
   }
 ]
@@ -177,15 +177,18 @@ export function Header() {
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center space-x-4">
           <a
-            href="#"
+            href="/login"
             className="text-gray-200 hover:text-white transition-colors"
           >
             Login
           </a>
-          <button className="px-6 py-2 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center space-x-2">
+          <a
+            href="/solicitar-demo"
+            className="px-6 py-2 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center space-x-2"
+          >
             <span>Solicita una demo</span>
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -220,15 +223,18 @@ export function Header() {
               {/* Mobile Actions */}
               <div className="mt-6 pt-6 border-t border-blue-900">
                 <a
-                  href="#"
+                  href="/login"
                   className="block px-4 py-3 text-gray-200 hover:text-white transition-colors"
                 >
                   Login
                 </a>
-                <button className="w-full mt-3 px-6 py-3 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center justify-center space-x-2">
+                <a
+                  href="/solicitar-demo"
+                  className="w-full mt-3 px-6 py-3 bg-white hover:bg-gray-100 text-[#0A2540] font-semibold rounded-lg transition-colors flex items-center justify-center space-x-2"
+                >
                   <span>Solicita una demo</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>

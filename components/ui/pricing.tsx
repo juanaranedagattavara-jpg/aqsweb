@@ -92,7 +92,7 @@ export function PricingSection({ plans, heading, description }: PricingSectionPr
         {plans.map((plan, index) => (
           <motion.div
             key={plan.id}
-            className={`relative rounded-2xl p-8 ${
+            className={`relative rounded-2xl p-8 flex flex-col h-full ${
               plan.highlighted
                 ? 'bg-gradient-to-br from-primary-900/20 to-primary-800/20 border-2 border-primary-500/50'
                 : 'bg-gray-900/50 border border-gray-700'
@@ -135,7 +135,7 @@ export function PricingSection({ plans, heading, description }: PricingSectionPr
             </div>
 
             {/* Features */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4 mb-8 flex-1">
               {plan.features.map((feature, featureIndex) => (
                 <div key={featureIndex} className="flex items-start">
                   <Check className="w-5 h-5 text-primary-400 mt-0.5 mr-3 flex-shrink-0" />
@@ -160,11 +160,7 @@ export function PricingSection({ plans, heading, description }: PricingSectionPr
 
             {/* CTA Button */}
             <button
-              className={`w-full py-3 px-6 rounded-lg font-semibold transition-all ${
-                plan.highlighted
-                  ? 'bg-primary-600 hover:bg-primary-700 text-white shadow-lg hover:shadow-primary-500/25'
-                  : 'bg-gray-700 hover:bg-gray-600 text-white'
-              }`}
+              className="w-full py-3 px-6 rounded-lg font-semibold transition-all bg-primary-600 hover:bg-primary-700 text-white shadow-lg hover:shadow-primary-500/25 mt-auto"
             >
               {plan.btn.text}
             </button>

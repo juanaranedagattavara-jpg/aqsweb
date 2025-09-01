@@ -3,11 +3,12 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
+import { FooterMinimal } from "@/components/layout/footer-minimal"
 
 // Card Components
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function AnimatedCard({ className, ...props }: CardProps) {
+function AnimatedCard({ className, ...props }: CardProps) {
   return (
     <div
       role="region"
@@ -22,7 +23,7 @@ export function AnimatedCard({ className, ...props }: CardProps) {
   )
 }
 
-export function CardBody({ className, ...props }: CardProps) {
+function CardBody({ className, ...props }: CardProps) {
   return (
     <div
       role="group"
@@ -37,7 +38,7 @@ export function CardBody({ className, ...props }: CardProps) {
 
 interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
 
-export function CardTitle({ className, ...props }: CardTitleProps) {
+function CardTitle({ className, ...props }: CardTitleProps) {
   return (
     <h3
       className={cn(
@@ -51,7 +52,7 @@ export function CardTitle({ className, ...props }: CardTitleProps) {
 
 interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export function CardDescription({ className, ...props }: CardDescriptionProps) {
+function CardDescription({ className, ...props }: CardDescriptionProps) {
   return (
     <p
       className={cn(
@@ -63,7 +64,7 @@ export function CardDescription({ className, ...props }: CardDescriptionProps) {
   )
 }
 
-export function CardVisual({ className, ...props }: CardProps) {
+function CardVisual({ className, ...props }: CardProps) {
   return (
     <div
       className={cn("h-[160px] w-[320px] overflow-hidden", className)}
@@ -711,8 +712,57 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        {/* Context Section */}
-        <div className="max-w-5xl mx-auto mb-16 p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
+
+
+        {/* Interactive Cards Section */}
+        <div className="max-w-7xl mx-auto px-16">
+          <h2 className="text-3xl font-bold mb-12 text-center text-primary-400">
+            Demostración Interactiva
+          </h2>
+          <p className="text-center text-gray-400 mb-20 max-w-3xl mx-auto">
+            Pasa el cursor sobre cada tarjeta para ver las animaciones y entender mejor cómo funcionan 
+            los diferentes tipos de visualización en nuestros dashboards.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-16 place-items-center justify-items-center mx-auto max-w-7xl">
+            {cards.map((card, index) => (
+              <AnimatedCard key={index} className="w-[320px] mx-4 my-4">
+                <CardVisual className="h-[160px] w-[320px]">
+                  {card.visual}
+                </CardVisual>
+                <CardBody>
+                  <CardTitle>{card.title}</CardTitle>
+                  <CardDescription>{card.description}</CardDescription>
+                </CardBody>
+              </AnimatedCard>
+            ))}
+          </div>
+          
+          {/* Spacing after cards */}
+          <div className="h-20"></div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <div className="bg-gradient-to-r from-primary-600/20 to-primary-800/20 p-8 rounded-2xl border border-primary-500/30">
+            <h3 className="text-2xl font-bold mb-4 text-primary-300">
+              ¿Listo para explorar tu dashboard personalizado?
+            </h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Cada dashboard se adapta a tus necesidades específicas y te proporciona la información 
+              que necesitas para tomar decisiones informadas en el comercio exterior.
+            </p>
+            <a 
+              href="/precios"
+              className="inline-block px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary-500/25"
+            >
+              Ver planes
+            </a>
+          </div>
+        </div>
+
+        {/* Context Section - Moved below CTA */}
+        <div className="max-w-5xl mx-auto mt-16 p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
           <h2 className="text-3xl font-bold mb-6 text-primary-400">Tipos de Dashboard Disponibles</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -767,47 +817,6 @@ export default function DashboardPage() {
                 <li>• Identificación de cuellos de botella</li>
               </ul>
             </div>
-          </div>
-        </div>
-
-        {/* Interactive Cards Section */}
-        <div className="max-w-5xl mx-auto px-8">
-          <h2 className="text-3xl font-bold mb-8 text-center text-primary-400">
-            Demostración Interactiva
-          </h2>
-          <p className="text-center text-gray-400 mb-12 max-w-3xl mx-auto">
-            Pasa el cursor sobre cada tarjeta para ver las animaciones y entender mejor cómo funcionan 
-            los diferentes tipos de visualización en nuestros dashboards.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center justify-items-center mx-auto">
-            {cards.map((card, index) => (
-              <AnimatedCard key={index} className="w-[320px]">
-                <CardVisual className="h-[160px] w-[320px]">
-                  {card.visual}
-                </CardVisual>
-                <CardBody>
-                  <CardTitle>{card.title}</CardTitle>
-                  <CardDescription>{card.description}</CardDescription>
-                </CardBody>
-              </AnimatedCard>
-            ))}
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-primary-600/20 to-primary-800/20 p-8 rounded-2xl border border-primary-500/30">
-            <h3 className="text-2xl font-bold mb-4 text-primary-300">
-              ¿Listo para explorar tu dashboard personalizado?
-            </h3>
-            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Cada dashboard se adapta a tus necesidades específicas y te proporciona la información 
-              que necesitas para tomar decisiones informadas en el comercio exterior.
-            </p>
-            <button className="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary-500/25">
-              Solicita una Demo
-            </button>
           </div>
         </div>
       </div>

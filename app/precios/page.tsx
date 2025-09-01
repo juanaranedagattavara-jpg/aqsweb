@@ -1,14 +1,29 @@
 import React from 'react';
 import { PricingSection } from '@/components/ui/pricing';
+import { FooterMinimal } from '@/components/layout/footer-minimal';
+import { DashboardCarousel } from '@/components/ui/dashboard-carousel';
+import { dashboardCards } from '@/lib/dashboard-data';
 
 export default function Precios() {
 	return (
-		<div className="min-h-screen bg-black py-12">
-					<PricingSection
-			plans={PLANS}
-			heading="Planes y Precios"
-			description="Elige el plan que mejor se adapte a tus necesidades de análisis de comercio exterior."
-		/>
+		<div className="min-h-screen bg-black py-12 flex flex-col">
+			<PricingSection
+				plans={PLANS}
+				heading="Planes y Precios"
+				description="Elige el plan que mejor se adapte a tus necesidades de análisis de comercio exterior."
+			/>
+			
+			{/* Dashboard Carousel */}
+			<section className="py-20 border-t border-gray-800">
+				<DashboardCarousel 
+					cards={dashboardCards}
+					title="Dashboards Incluidos en tu Plan"
+					description="Cada plan incluye acceso completo a nuestros dashboards especializados en comercio exterior"
+				/>
+			</section>
+			
+			{/* Footer Minimalista */}
+			<FooterMinimal />
 		</div>
 	);
 }
@@ -44,11 +59,7 @@ const PLANS = [
 			yearly: 1825.2,
 		},
 		features: [
-			{ text: 'Base de Datos Compilada' },
-			{ text: 'Resumen Ejecutivo' },
-			{ text: 'Análisis de Tendencias' },
-			{ text: 'Ranking de Empresas' },
-			{ text: 'Ranking de Mercados' },
+			{ text: 'Todo lo del plan Básico' },
 			{ text: 'Market Share Empresas' },
 			{ text: 'Market Share Destinos / Origen' },
 			{ text: 'Mix de Productos' },
@@ -67,14 +78,7 @@ const PLANS = [
 			yearly: 3229.2,
 		},
 		features: [
-			{ text: 'Base de Datos Compilada' },
-			{ text: 'Resumen Ejecutivo' },
-			{ text: 'Análisis de Tendencias' },
-			{ text: 'Ranking de Empresas' },
-			{ text: 'Ranking de Mercados' },
-			{ text: 'Market Share Empresas' },
-			{ text: 'Market Share Destinos / Origen' },
-			{ text: 'Mix de Productos' },
+			{ text: 'Todo lo del plan PRO' },
 			{ text: 'Comparación de Calibres' },
 			{ text: 'Participación de Calibres por Empresa' },
 			{ text: 'Participación de Calibres por Mercado' },
