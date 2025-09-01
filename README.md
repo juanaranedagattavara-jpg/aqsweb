@@ -1,53 +1,62 @@
-# QSP - Plataforma de Inteligencia de Datos Premium
+# QSP Analytics SaaS Demo
 
-Una landing page moderna y premium para QSP, construida con Next.js 14 y Tailwind CSS, diseñada para transmitir sofisticación y profesionalismo en el sector de inteligencia de datos.
+Un proyecto demo SaaS completo construido con Next.js 14, TypeScript, TailwindCSS y Zustand para simular una plataforma de analytics de comercio exterior.
 
 ## 🚀 Características
 
-- **Diseño Premium**: Estilo oscuro y sofisticado con glassmorphism y efectos de luz
-- **Responsive**: Completamente adaptable a todos los dispositivos
-- **Animaciones**: Transiciones suaves con Framer Motion
-- **Tipografías**: Playfair Display para títulos (serif elegante) e Inter para texto
-- **Componentes UI**: Sistema de componentes reutilizables y accesibles
-- **Performance**: Optimizado para velocidad y SEO
+- **Landing Page** con CTA principal
+- **Sistema de Login Mock** con selector de plan
+- **16 Dashboards** especializados en comercio exterior
+- **Control de Acceso** basado en planes de suscripción
+- **UI Responsiva** con tema oscuro (slate + indigo)
+- **Gestión de Estado** con Zustand
+- **Navegación Protegida** con middleware
+- **Modal de Upsell** para dashboards bloqueados
 
-## 🛠️ Stack Tecnológico
+## 📊 Planes de Suscripción
+
+- **Básico ($29/mes)**: Acceso a 4 dashboards
+- **Pro ($79/mes)**: Acceso a 8 dashboards  
+- **Premium ($199/mes)**: Acceso a 16 dashboards
+
+## 🛠️ Tecnologías
 
 - **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS + @tailwindcss/typography + tailwind-scrollbar
-- **Animaciones**: Framer Motion
-- **Iconos**: Lucide React
-- **Tipografías**: Google Fonts (Playfair Display + Inter)
 - **Lenguaje**: TypeScript
-
-## 🎨 Paleta de Colores
-
-```ts
-primary: "#0B1220"        // Fondo principal oscuro
-primary-900: "#0E1A2A"    // Fondo secundario
-primary-800: "#11243A"    // Fondo terciario
-accent: "#3BA1FF"         // Azul principal
-accent-2: "#1EC9A3"       // Verde turquesa
-muted: "#8FA3BF"          // Texto secundario
-card: "rgba(255,255,255,0.06)"  // Tarjetas glassmorphism
-border: "rgba(255,255,255,0.12)" // Bordes sutiles
-warning: "#F5A524"        // Naranja/amarillo
-```
+- **Styling**: TailwindCSS
+- **Estado**: Zustand
+- **UI Components**: Headless UI + Framer Motion
+- **Iconos**: Lucide React
 
 ## 📁 Estructura del Proyecto
 
 ```
-├── app/                    # App Router de Next.js
-│   ├── globals.css        # Estilos globales y configuración de Tailwind
-│   ├── layout.tsx         # Layout principal con tipografías
-│   └── page.tsx           # Página principal
-├── components/             # Componentes reutilizables
-│   ├── ui/                # Componentes base (Button, Card, Input)
-│   ├── layout/            # Header y Footer
-│   └── marketing/         # Componentes de marketing (Hero, Features, Stats)
-├── lib/                    # Utilidades y helpers
-├── tailwind.config.ts      # Configuración de Tailwind CSS
-└── package.json            # Dependencias del proyecto
+src/
+├── app/
+│   ├── page.tsx                    # Landing page
+│   ├── login/
+│   │   └── page.tsx               # Login/registro mock
+│   └── (protected)/
+│       ├── layout.tsx             # Layout protegido
+│       ├── dashboards/
+│       │   ├── page.tsx           # Grid de dashboards
+│       │   └── [code]/
+│       │       └── page.tsx       # Detalle del dashboard
+│       └── account/
+│           └── page.tsx           # Gestión de cuenta
+├── components/
+│   ├── DashboardCard.tsx          # Tarjeta de dashboard
+│   ├── LockedDialog.tsx           # Modal de upsell
+│   ├── Sidebar.tsx                # Navegación lateral
+│   └── Topbar.tsx                 # Barra superior
+├── lib/
+│   ├── plans.ts                   # Configuración de planes
+│   ├── dashboards.ts              # Datos de dashboards
+│   └── access.ts                  # Lógica de acceso
+├── store/
+│   └── useAuth.ts                 # Store de autenticación
+└── styles/
+    └── globals.css                # Estilos globales
 ```
 
 ## 🚀 Instalación
@@ -55,7 +64,7 @@ warning: "#F5A524"        // Naranja/amarillo
 1. **Clonar el repositorio**
    ```bash
    git clone <repository-url>
-   cd qsp-premium-landing
+   cd qsp-analytics-saas
    ```
 
 2. **Instalar dependencias**
@@ -68,111 +77,101 @@ warning: "#F5A524"        // Naranja/amarillo
    npm run dev
    ```
 
-4. **Construir para producción**
-   ```bash
-   npm run build
-   npm start
+4. **Abrir en el navegador**
+   ```
+   http://localhost:3000
    ```
 
-## 🎯 Componentes Principales
+## 🔐 Flujo de Uso
 
-### Header
-- Navegación responsive con dropdowns
-- Barra de búsqueda integrada
-- Botones CTA prominentes
-- Efectos de glassmorphism
+1. **Landing Page** (`/`) - Información del producto y CTA
+2. **Login** (`/login`) - Selección de plan y creación de cuenta mock
+3. **Dashboard Grid** (`/app/dashboards`) - Vista de todos los dashboards
+4. **Dashboard Detail** (`/app/dashboards/[code]`) - Vista individual con placeholder
+5. **Account** (`/app/account`) - Gestión de plan y upgrade mock
 
-### Hero Section
-- Título principal impactante
-- Descripción clara del producto
-- Elementos visuales animados (globo 3D, puntos de datos)
-- Botones de acción claros
+## 🎯 Funcionalidades Clave
 
-### Features
-- Grid de características con iconos
-- Efectos hover y animaciones
-- Diseño de tarjetas glassmorphism
+### Control de Acceso
+- **Básico**: Dashboards 1-4 disponibles
+- **Pro**: Dashboards 1-8 disponibles  
+- **Premium**: Todos los dashboards disponibles
 
-### Stats
-- Estadísticas clave del producto
-- Iconos temáticos
-- Layout responsive
+### Estados de Dashboard
+- **Disponible**: Acceso directo al dashboard
+- **Bloqueado**: Botón "Desbloquear" que abre modal de upsell
+- **Próximamente**: Botón deshabilitado para dashboards en desarrollo
 
-### Footer
-- Enlaces organizados por categorías
-- Newsletter signup
-- Información de contacto
-- Enlaces sociales
+### Navegación
+- **Sidebar**: Navegación principal a Dashboards y Mi Plan
+- **Topbar**: Información del usuario y botón de logout
+- **Protección**: Redirección automática si no hay acceso
 
-## 🎨 Personalización
+## 🔧 Personalización
 
-### Colores
-Los colores se pueden personalizar en `tailwind.config.ts` en la sección `theme.extend.colors`.
+### Dashboards
+Edita `src/lib/dashboards.ts` para modificar:
+- Títulos y descripciones
+- Categorías
+- Estado "próximamente"
 
-### Tipografías
-Las tipografías se configuran en `app/layout.tsx` y se aplican globalmente en `app/globals.css`.
+### Planes
+Modifica `src/lib/plans.ts` para ajustar:
+- Precios
+- Límites de dashboards
+- Características
 
-### Componentes
-Todos los componentes están construidos con Tailwind CSS y son fácilmente personalizables modificando las clases CSS.
+### Estilos
+Personaliza `src/styles/globals.css` y `tailwind.config.js` para:
+- Colores del tema
+- Tipografías
+- Componentes personalizados
+
+## 🚧 TODOs para Producción
+
+- [ ] **Autenticación Real**: Integrar con Auth0, Supabase, o similar
+- [ ] **Base de Datos**: PostgreSQL, MongoDB, o Supabase
+- [ ] **Pagos**: Integración con Stripe para suscripciones
+- [ ] **Dashboards Reales**: Iframes o APIs de dashboards reales
+- [ ] **Analytics**: Tracking de uso y métricas
+- [ ] **Notificaciones**: Sistema de alertas y emails
+- [ ] **Testing**: Jest, React Testing Library
+- [ ] **CI/CD**: GitHub Actions o similar
 
 ## 📱 Responsive Design
 
-El diseño es completamente responsive y se adapta a:
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
+El proyecto está completamente optimizado para:
+- **Mobile**: 320px+
+- **Tablet**: 768px+
+- **Desktop**: 1024px+
+- **Large Desktop**: 1280px+
 
-## ⚡ Performance
+## 🎨 Tema de Colores
 
-- **Lazy Loading**: Componentes cargados bajo demanda
-- **Optimización de imágenes**: Next.js Image optimization
-- **Code Splitting**: Automático con Next.js
-- **CSS Purge**: Tailwind CSS purga automáticamente CSS no utilizado
-
-## 🔧 Scripts Disponibles
-
-```json
-{
-  "dev": "next dev",           # Desarrollo local
-  "build": "next build",       # Construcción para producción
-  "start": "next start",       # Servidor de producción
-  "lint": "next lint"          # Linting del código
-}
-```
-
-## 🌟 Características del Diseño
-
-### Glassmorphism
-- Efectos de desenfoque (backdrop-blur)
-- Transparencias sutiles
-- Bordes con opacidad reducida
-
-### Microinteracciones
-- Hover effects en botones y tarjetas
-- Transiciones suaves en todos los elementos
-- Estados focus accesibles
-
-### Tipografía
-- **Títulos**: Playfair Display (serif elegante)
-- **Texto**: Inter (sans-serif legible)
-- **Jerarquía**: Tamaños y pesos bien definidos
-
-## 📄 Licencia
-
-Este proyecto es privado y está destinado exclusivamente para QSP.
+- **Primario**: Indigo (600, 700)
+- **Secundario**: Slate (600, 700, 800, 900)
+- **Acentos**: Verde para éxito, rojo para errores, amarillo para advertencias
+- **Fondo**: Slate 900 (oscuro)
+- **Texto**: Blanco y variaciones de slate
 
 ## 🤝 Contribución
 
-Para contribuir al proyecto:
-1. Crear una rama feature
-2. Implementar cambios
-3. Crear un Pull Request
-4. Revisar y aprobar cambios
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
 ## 📞 Soporte
 
-Para soporte técnico o preguntas sobre el proyecto, contactar al equipo de desarrollo de QSP.
+Para soporte o preguntas:
+- Abre un issue en GitHub
+- Contacta al equipo de desarrollo
 
 ---
 
-**QSP** - Transformando datos en inteligencia empresarial
+**Nota**: Este es un proyecto demo para fines educativos y de demostración. No está destinado para uso en producción sin las modificaciones apropiadas.

@@ -1,26 +1,64 @@
 'use client'
 
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@/components/ui/button'
-import { contactSchema, type ContactForm as ContactFormType } from '@/lib/zod-schemas'
 import { Mail, Phone, Building, MessageSquare, Send, CheckCircle } from 'lucide-react'
 
+interface ContactFormData {
+  name: string
+  email: string
+  company: string
+  phone: string
+  message: string
+}
+
 export function ContactForm() {
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: '',
+    email: '',
+    company: '',
+    phone: '',
+    message: ''
+  })
+  const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm<ContactFormType>({
-    resolver: zodResolver(contactSchema)
-  })
+  const handleInputChange = (field: keyof ContactFormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+    // Limpiar error del campo cuando el usuario empiece a escribir
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }))
+    }
+  }
 
-  const onSubmit = async (data: ContactFormType) => {
+  const validateForm = (): boolean => {
+    const newErrors: Partial<Record<keyof ContactFormData, string>> = {}
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'El nombre es requerido'
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'El email es requerido'
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'El email no es válido'
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'El mensaje es requerido'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!validateForm()) {
+      return
+    }
+
     setIsSubmitting(true)
     
     try {
@@ -28,10 +66,16 @@ export function ContactForm() {
       await new Promise(resolve => setTimeout(resolve, 2000))
       
       // Aquí iría la lógica real de envío
-      console.log('Form data:', data)
+      console.log('Form data:', formData)
       
       setIsSubmitted(true)
-      reset()
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        message: ''
+      })
       
       // Resetear estado después de 5 segundos
       setTimeout(() => setIsSubmitted(false), 5000)
@@ -52,13 +96,12 @@ export function ContactForm() {
         <p className="text-green-700 mb-4">
           Gracias por contactarnos. Nos pondremos en contacto contigo en las próximas 24 horas.
         </p>
-        <Button
+        <button
           onClick={() => setIsSubmitted(false)}
-          variant="outline"
-          className="border-green-300 text-green-700 hover:bg-green-100"
+          className="px-6 py-2 border border-green-300 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
         >
           Enviar otro mensaje
-        </Button>
+        </button>
       </div>
     )
   }
@@ -74,7 +117,7 @@ export function ContactForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={onSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Nombre */}
           <div className="form-group">
@@ -85,14 +128,15 @@ export function ContactForm() {
               </span>
             </label>
             <input
-              {...register('name')}
               type="text"
               id="name"
+              value={formData.name}
+              onChange={(e) => handleInputChange('name', e.target.value)}
               className={`input ${errors.name ? 'border-red-500' : ''}`}
               placeholder="Tu nombre completo"
             />
             {errors.name && (
-              <p className="error-message">{errors.name.message}</p>
+              <p className="error-message">{errors.name}</p>
             )}
           </div>
 
@@ -101,75 +145,57 @@ export function ContactForm() {
             <label htmlFor="email" className="label">
               <span className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                Email corporativo
+                Email
               </span>
             </label>
             <input
-              {...register('email')}
               type="email"
               id="email"
+              value={formData.email}
+              onChange={(e) => handleInputChange('email', e.target.value)}
               className={`input ${errors.email ? 'border-red-500' : ''}`}
-              placeholder="tu@empresa.com"
+              placeholder="tu@email.com"
             />
             {errors.email && (
-              <p className="error-message">{errors.email.message}</p>
+              <p className="error-message">{errors.email}</p>
             )}
           </div>
-        </div>
 
-        {/* Empresa */}
-        <div className="form-group">
-          <label htmlFor="company" className="label">
-            <span className="flex items-center">
-              <Building className="w-4 h-4 mr-2" />
-              Empresa
-            </span>
-          </label>
-          <input
-            {...register('company')}
-            type="text"
-            id="company"
-            className={`input ${errors.company ? 'border-red-500' : ''}`}
-            placeholder="Nombre de tu empresa"
-          />
-          {errors.company && (
-            <p className="error-message">{errors.company.message}</p>
-          )}
-        </div>
+          {/* Empresa */}
+          <div className="form-group">
+            <label htmlFor="company" className="label">
+              <span className="flex items-center">
+                <Building className="w-4 h-4 mr-2" />
+                Empresa
+              </span>
+            </label>
+            <input
+              type="text"
+              id="company"
+              value={formData.company}
+              onChange={(e) => handleInputChange('company', e.target.value)}
+              className="input"
+              placeholder="Nombre de tu empresa"
+            />
+          </div>
 
-        {/* Teléfono */}
-        <div className="form-group">
-          <label htmlFor="phone" className="label">
-            <span className="flex items-center">
-              <Phone className="w-4 h-4 mr-2" />
-              Teléfono (opcional)
-            </span>
-          </label>
-          <input
-            {...register('phone')}
-            type="tel"
-            id="phone"
-            className="input"
-            placeholder="+34 XXX XXX XXX"
-          />
-        </div>
-
-        {/* Servicio */}
-        <div className="form-group">
-          <label htmlFor="service" className="label">
-            Tipo de servicio
-          </label>
-          <select
-            {...register('service')}
-            id="service"
-            className="input"
-          >
-            <option value="">Selecciona un servicio</option>
-            <option value="analytics">Analytics y BI</option>
-            <option value="consulting">Consultoría estratégica</option>
-            <option value="implementation">Implementación</option>
-            <option value="other">Otro</option>
-          </select>
+          {/* Teléfono */}
+          <div className="form-group">
+            <label htmlFor="phone" className="label">
+              <span className="flex items-center">
+                <Phone className="w-4 h-4 mr-2" />
+                Teléfono
+              </span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              value={formData.phone}
+              onChange={(e) => handleInputChange('phone', e.target.value)}
+              className="input"
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
         </div>
 
         {/* Mensaje */}
@@ -177,47 +203,41 @@ export function ContactForm() {
           <label htmlFor="message" className="label">
             <span className="flex items-center">
               <MessageSquare className="w-4 h-4 mr-2" />
-              Cuéntanos sobre tu proyecto
+              Mensaje
             </span>
           </label>
           <textarea
-            {...register('message')}
             id="message"
-            rows={5}
-            className={`textarea ${errors.message ? 'border-red-500' : ''}`}
-            placeholder="Describe tu proyecto, objetivos y desafíos..."
+            value={formData.message}
+            onChange={(e) => handleInputChange('message', e.target.value)}
+            className={`input min-h-[120px] resize-none ${errors.message ? 'border-red-500' : ''}`}
+            placeholder="Cuéntanos sobre tu proyecto, necesidades o cualquier consulta que tengas..."
           />
           {errors.message && (
-            <p className="error-message">{errors.message.message}</p>
+            <p className="error-message">{errors.message}</p>
           )}
         </div>
 
         {/* Submit Button */}
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full py-3 text-lg"
-        >
-          {isSubmitting ? (
-            <>
-              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-              Enviando...
-            </>
-          ) : (
-            <>
-              <Send className="w-5 h-5 mr-2" />
-              Enviar mensaje
-            </>
-          )}
-        </Button>
-
-        <p className="text-sm text-gray-500 text-center">
-          Al enviar este formulario, aceptas nuestra{' '}
-          <a href="/legal/privacidad" className="text-blue-600 hover:underline">
-            política de privacidad
-          </a>
-          .
-        </p>
+        <div className="text-center">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn-primary inline-flex items-center gap-2 px-8 py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Enviando...
+              </>
+            ) : (
+              <>
+                <Send className="w-5 h-5" />
+                Enviar mensaje
+              </>
+            )}
+          </button>
+        </div>
       </form>
     </div>
   )

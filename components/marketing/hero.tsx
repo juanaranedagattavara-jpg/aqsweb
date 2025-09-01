@@ -2,7 +2,7 @@
 
 import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
-import { DashboardGraphics } from "@/components/ui/dashboard-graphics"
+import { InteractiveDashboardCarousel } from "@/components/ui/interactive-dashboard-carousel"
 
 export function Hero() {
   return (
@@ -62,14 +62,17 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Dashboard Graphics */}
+        {/* Interactive Dashboards Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
           className="mt-20"
         >
-          <DashboardGraphics />
+          <InteractiveDashboardCarousel
+            title="Dashboards Especializados"
+            description="Explora nuestros dashboards interactivos diseñados para transformar datos en decisiones estratégicas"
+          />
         </motion.div>
       </div>
     </section>

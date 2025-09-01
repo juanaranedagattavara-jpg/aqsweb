@@ -1,112 +1,77 @@
 'use client'
 
-import { Lightbulb, Zap, Target } from "lucide-react"
-import { motion } from "framer-motion"
+import { Target, Zap, Shield, Users, Globe, BarChart3 } from 'lucide-react'
+import { motion } from 'framer-motion'
+
+const differentiators = [
+  {
+    icon: <Target className="w-8 h-8" />,
+    title: 'Enfoque Especializado',
+    description: 'Nos enfocamos exclusivamente en comercio exterior, con expertise profundo en el sector.'
+  },
+  {
+    icon: <Zap className="w-8 h-8" />,
+    title: 'Tecnología de Vanguardia',
+    description: 'Utilizamos las últimas tecnologías de IA y machine learning para análisis predictivo.'
+  },
+  {
+    icon: <Shield className="w-8 h-8" />,
+    title: 'Datos Verificados',
+    description: 'Todas nuestras fuentes son oficiales y verificadas, garantizando la máxima precisión.'
+  },
+  {
+    icon: <Users className="w-8 h-8" />,
+    title: 'Soporte Experto',
+    description: 'Equipo de especialistas en comercio exterior disponible para consultoría personalizada.'
+  },
+  {
+    icon: <Globe className="w-8 h-8" />,
+    title: 'Cobertura Global',
+    description: 'Acceso a datos de más de 200 países con análisis regional y local detallado.'
+  },
+  {
+    icon: <BarChart3 className="w-8 h-8" />,
+    title: 'Dashboards Personalizados',
+    description: 'Cada dashboard se adapta a las necesidades específicas de tu industria y mercado.'
+  }
+]
 
 export function Differentiation() {
   return (
-    <section className="py-24 bg-black border-b border-gray-800">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left side - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-              Más que datos, conocimiento estratégico
-            </h2>
-            
-            <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              No necesitas más planillas: necesitas un socio que convierta la información en claridad y dirección.
-            </p>
-            
-            <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-              En QSP creemos que <span className="text-primary-400 font-semibold">"lo que no se mide, no se puede mejorar"</span> y por eso diseñamos inteligencia de mercado que impulsa resultados tangibles.
-            </p>
+    <section className="py-20 bg-gray-900 border-b border-gray-800">
+      <div className="container mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            ¿Por Qué Elegir QSP?
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Nuestra propuesta de valor única nos distingue de la competencia y nos convierte en tu socio estratégico.
+          </p>
+        </motion.div>
 
-            {/* Key points */}
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Lightbulb className="w-6 h-6 text-primary-400" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    Insights Accionables
-                  </h3>
-                  <p className="text-gray-400">
-                    No solo números, sino recomendaciones claras para tu negocio
-                  </p>
-                </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {differentiators.map((differentiator, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300 hover:border-primary-500/30"
+            >
+              <div className="w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center mb-6 text-primary-400">
+                {differentiator.icon}
               </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Zap className="w-6 h-6 text-primary-400" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    Anticipación al Mercado
-                  </h3>
-                  <p className="text-gray-400">
-                    Identifica tendencias antes de que se vuelvan obvias
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-primary-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Target className="w-6 h-6 text-primary-400" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    Enfoque Estratégico
-                  </h3>
-                  <p className="text-gray-400">
-                    Cada dato se convierte en una ventaja competitiva
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right side - Visual */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="relative"
-          >
-            <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/50 rounded-2xl p-8 border border-gray-700 shadow-2xl">
-              <div className="bg-noise rounded-xl p-12 text-center">
-                <div className="w-32 h-32 bg-primary-500/20 rounded-full mx-auto mb-8 flex items-center justify-center">
-                  <Target className="w-16 h-16 text-primary-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Conocimiento Estratégico
-                </h3>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  Transformamos datos en ventajas competitivas para tu empresa
-                </p>
-                
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-6 mt-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-400 mb-2">100%</div>
-                    <div className="text-gray-400 text-sm">Datos Verificados</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-400 mb-2">24/7</div>
-                    <div className="text-gray-400 text-sm">Acceso Continuo</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+              <h3 className="text-xl font-semibold text-white mb-4">{differentiator.title}</h3>
+              <p className="text-gray-300 leading-relaxed">{differentiator.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

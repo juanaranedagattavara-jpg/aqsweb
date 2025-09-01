@@ -1,22 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply text-white bg-primary font-sans antialiased;
-    background-image: 
-      radial-gradient(ellipse at top, rgba(59, 161, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom, rgba(30, 201, 163, 0.1) 0%, transparent 50%);
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-semibold;
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
@@ -26,225 +64,82 @@
   }
   
   .btn-primary {
-    @apply inline-flex items-center px-6 py-3 bg-accent text-white font-semibold rounded-full shadow-glow-blue hover:shadow-glow-blue transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary;
+    @apply bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors;
   }
   
   .btn-secondary {
-    @apply inline-flex items-center px-6 py-3 bg-transparent text-white font-semibold rounded-full border border-border hover:bg-white/5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary;
+    @apply bg-slate-100 text-slate-900 px-6 py-3 rounded-lg font-semibold hover:bg-slate-200 transition-colors;
   }
   
   .btn-outline {
-    @apply inline-flex items-center px-6 py-3 bg-transparent text-white font-semibold rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-primary;
+    @apply border border-slate-300 text-slate-700 px-6 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors;
   }
   
   .card {
-    @apply bg-card backdrop-blur-sm border border-border rounded-2xl shadow-glass hover:shadow-glass-hover transition-all duration-300;
-  }
-  
-  .card-hover {
-    @apply hover:scale-105 hover:shadow-glow-blue;
+    @apply bg-white rounded-xl shadow-sm border border-slate-200 p-6;
   }
   
   .input {
-    @apply block w-full px-4 py-3 bg-primary-800 border border-border rounded-2xl text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300;
+    @apply w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent;
   }
   
-  .search-input {
-    @apply block w-full px-6 py-4 bg-primary-800/50 backdrop-blur-sm border border-border rounded-2xl text-white placeholder-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-300;
+  .input-error {
+    @apply border-red-500 focus:ring-red-500 focus:border-red-500;
   }
   
-  .nav-link {
-    @apply text-white/80 hover:text-white transition-colors duration-200 font-medium;
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
   
-  .nav-link-active {
-    @apply text-white border-b-2 border-accent;
+  .badge-primary {
+    @apply bg-indigo-100 text-indigo-800;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .badge-error {
+    @apply bg-red-100 text-red-800;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent;
+  .text-balance {
+    text-wrap: balance;
   }
   
-  .bg-glass {
-    @apply bg-card backdrop-blur-sm border border-border;
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
   
-  .bg-premium {
-    @apply bg-gradient-premium;
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
   
-  .shadow-glow-blue {
-    @apply shadow-[0_0_20px_rgba(59,161,255,0.3)];
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
   
-  .shadow-glow-green {
-    @apply shadow-[0_0_20px_rgba(30,201,163,0.3)];
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
-  
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-primary-800;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-accent rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-accent-2;
-}
-
-/* Grain effect for hero */
-.bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-.bg-grainy {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* Custom selection */
-::selection {
-  @apply bg-accent/20 text-white;
-}
-
-/* Smooth transitions for all elements */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-/* Estilos personalizados para el calendario de demo */
-.demo-calendar {
-  background: transparent !important;
-  border: none !important;
-  font-family: inherit !important;
-}
-
-.demo-calendar .react-calendar__navigation {
-  background: transparent !important;
-  border: none !important;
-  margin-bottom: 1rem !important;
-}
-
-.demo-calendar .react-calendar__navigation button {
-  background: transparent !important;
-  border: none !important;
-  color: white !important;
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
-  padding: 0.5rem !important;
-  border-radius: 0.5rem !important;
-  transition: all 0.2s ease !important;
-}
-
-.demo-calendar .react-calendar__navigation button:hover {
-  background: rgba(59, 130, 246, 0.2) !important;
-  color: #3b82f6 !important;
-}
-
-.demo-calendar .react-calendar__navigation button:disabled {
-  opacity: 0.5 !important;
-  cursor: not-allowed !important;
-}
-
-.demo-calendar .react-calendar__month-view__weekdays {
-  background: transparent !important;
-  border: none !important;
-  margin-bottom: 0.5rem !important;
-}
-
-.demo-calendar .react-calendar__month-view__weekdays__weekday {
-  color: #9ca3af !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  font-size: 0.75rem !important;
-  padding: 0.5rem !important;
-}
-
-.demo-calendar .react-calendar__month-view__days {
-  background: transparent !important;
-  border: none !important;
-}
-
-.demo-calendar .react-calendar__tile {
-  background: transparent !important;
-  border: none !important;
-  color: white !important;
-  padding: 0.75rem !important;
-  border-radius: 0.5rem !important;
-  transition: all 0.2s ease !important;
-  font-weight: 500 !important;
-}
-
-.demo-calendar .react-calendar__tile:hover {
-  background: rgba(59, 130, 246, 0.2) !important;
-  color: #3b82f6 !important;
-}
-
-.demo-calendar .react-calendar__tile:focus {
-  background: rgba(59, 130, 246, 0.3) !important;
-  color: #3b82f6 !important;
-  outline: none !important;
-}
-
-.demo-calendar .react-calendar__tile--active {
-  background: #3b82f6 !important;
-  color: white !important;
-  font-weight: 600 !important;
-}
-
-.demo-calendar .react-calendar__tile--now {
-  background: rgba(59, 130, 246, 0.1) !important;
-  color: #3b82f6 !important;
-  border: 2px solid #3b82f6 !important;
-}
-
-.demo-calendar .react-calendar__tile:disabled {
-  background: rgba(107, 114, 128, 0.1) !important;
-  color: #6b7280 !important;
-  cursor: not-allowed !important;
-}
-
-.demo-calendar .react-calendar__tile:disabled:hover {
-  background: rgba(107, 114, 128, 0.1) !important;
-  color: #6b7280 !important;
-}
-
-.demo-calendar .react-calendar__month-view__days__day--neighboringMonth {
-  color: #6b7280 !important;
-}
-
-.demo-calendar .react-calendar__year-view__months__month,
-.demo-calendar .react-calendar__decade-view__years__year,
-.demo-calendar .react-calendar__century-view__decades__decade {
-  background: transparent !important;
-  border: none !important;
-  color: white !important;
-  padding: 1rem !important;
-  border-radius: 0.5rem !important;
-  transition: all 0.2s ease !important;
-}
-
-.demo-calendar .react-calendar__year-view__months__month:hover,
-.demo-calendar .react-calendar__decade-view__years__year:hover,
-.demo-calendar .react-calendar__century-view__decades__decade:hover {
-  background: rgba(59, 130, 246, 0.2) !important;
-  color: #3b82f6 !important;
 }

@@ -1,317 +1,355 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import Calendar from 'react-calendar'
-import { format } from 'date-fns'
-import { es } from 'date-fns/locale'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { CalendarIcon, Clock, User, Mail, CheckCircle } from 'lucide-react'
-import { FooterMinimal } from '@/components/layout/footer-minimal'
-import { DashboardCarousel } from '@/components/ui/dashboard-carousel'
-import { dashboardCards } from '@/lib/dashboard-data'
-
-type ValuePiece = Date | null
-type Value = ValuePiece | [ValuePiece, ValuePiece]
+import { useState } from 'react';
+import { Calendar, Mail, User, Phone } from 'lucide-react';
 
 interface DemoFormData {
-  nombre: string
-  email: string
-  fecha: Date | null
-  hora: string
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  preferredDate: string;
+  preferredTime: string;
+  message: string;
 }
-
-const horasDisponibles = [
-  '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
-  '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'
-]
 
 export default function SolicitarDemoPage() {
   const [formData, setFormData] = useState<DemoFormData>({
-    nombre: '',
+    name: '',
     email: '',
-    fecha: null,
-    hora: ''
-  })
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [errors, setErrors] = useState<Partial<Record<keyof DemoFormData, string>>>({})
+    phone: '',
+    company: '',
+    preferredDate: '',
+    preferredTime: '',
+    message: ''
+  });
 
-  const handleInputChange = (field: keyof DemoFormData, value: string | Date) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-    // Limpiar error del campo
-    if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }))
+  const [errors, setErrors] = useState<Partial<Record<keyof DemoFormData, string>>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name as keyof DemoFormData]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
-  }
+  };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof DemoFormData, string>> = {}
+    const newErrors: Partial<Record<keyof DemoFormData, string>> = {};
 
-    if (!formData.nombre.trim()) {
-      newErrors.nombre = 'El nombre es requerido'
-    }
+    if (!formData.name.trim()) newErrors.name = 'El nombre es requerido';
+    if (!formData.email.trim()) newErrors.email = 'El email es requerido';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido';
+    if (!formData.phone.trim()) newErrors.phone = 'El teléfono es requerido';
+    if (!formData.company.trim()) newErrors.company = 'La empresa es requerida';
+    if (!formData.preferredDate) newErrors.preferredDate = 'Selecciona una fecha preferida';
+    if (!formData.preferredTime) newErrors.preferredTime = 'Selecciona un horario preferido';
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'El email es requerido'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'El email no es válido'
-    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    if (!formData.fecha) {
-      newErrors.fecha = 'Selecciona una fecha'
-    }
-
-    if (!formData.hora) {
-      newErrors.hora = 'Selecciona una hora'
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     
-    if (validateForm()) {
-      // Aquí puedes enviar los datos a tu API
-      console.log('Datos del demo:', formData)
-      setIsSubmitted(true)
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      company: '',
+      preferredDate: '',
+      preferredTime: '',
+      message: ''
+    });
+  };
+
+  const getAvailableDates = () => {
+    const dates = [];
+    const today = new Date();
+    
+    for (let i = 1; i <= 14; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
       
-      // Resetear formulario después de 3 segundos
-      setTimeout(() => {
-        setIsSubmitted(false)
-        setFormData({
-          nombre: '',
-          email: '',
-          fecha: null,
-          hora: ''
-        })
-      }, 3000)
+      // Skip weekends
+      if (date.getDay() !== 0 && date.getDay() !== 6) {
+        dates.push(date);
+      }
     }
-  }
-
-  const tileDisabled = ({ date }: { date: Date }) => {
-    // Deshabilitar fines de semana y fechas pasadas
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
     
-    return (
-      date < today ||
-      date.getDay() === 0 || // Domingo
-      date.getDay() === 6    // Sábado
-    )
-  }
+    return dates;
+  };
+
+  const timeSlots = [
+    '09:00 - 10:00',
+    '10:00 - 11:00',
+    '11:00 - 12:00',
+    '14:00 - 15:00',
+    '15:00 - 16:00',
+    '16:00 - 17:00'
+  ];
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md text-center">
-          <CardContent className="pt-6">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-white mb-2">¡Demo Solicitado!</h2>
-            <p className="text-muted mb-4">
-              Hemos recibido tu solicitud de demo. Te contactaremos pronto para confirmar los detalles.
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-20">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center">
+            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h1 className="text-3xl font-bold text-slate-900 mb-4">¡Solicitud Enviada!</h1>
+            <p className="text-lg text-slate-600 mb-8">
+              Hemos recibido tu solicitud de demo. Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas para confirmar el horario.
             </p>
-            <Button 
+            <button
               onClick={() => setIsSubmitted(false)}
-              variant="outline"
-              className="w-full"
+              className="bg-indigo-600 text-white px-8 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
             >
               Solicitar Otro Demo
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900">
-      {/* Header */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Solicita tu Demo
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-bold text-slate-900 mb-4">
+            Solicita tu Demo Personalizado
           </h1>
-          <p className="text-xl text-muted max-w-2xl mx-auto">
-            Descubre cómo nuestra plataforma puede transformar tu negocio. 
-            Agenda una demostración personalizada con nuestro equipo de expertos.
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            Descubre cómo nuestra plataforma puede transformar tu análisis de comercio exterior. 
+            Agenda una sesión personalizada con nuestros expertos.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Calendario */}
-          <Card className="bg-primary-800/50 border-border/50 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-white">
-                <CalendarIcon className="w-5 h-5 text-accent" />
-                Selecciona una Fecha
-              </CardTitle>
-              <CardDescription>
-                Elige el día que mejor te convenga para tu demo
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex justify-center">
-                <Calendar
-                  onChange={(value: Value) => {
-                    if (value instanceof Date) {
-                      handleInputChange('fecha', value)
-                    }
-                  }}
-                  value={formData.fecha}
-                  tileDisabled={tileDisabled}
-                  minDate={new Date()}
-                  maxDate={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)} // 30 días
-                  className="demo-calendar"
-                />
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Calendar Section */}
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <Calendar className="w-6 h-6 text-indigo-600" />
+              <h2 className="text-2xl font-semibold text-slate-900">Calendario Disponible</h2>
+            </div>
+            
+            <div className="grid grid-cols-7 gap-2 mb-6">
+              {['Lun', 'Mar', 'Mié', 'Jue', 'Vie'].map(day => (
+                <div key={day} className="text-center text-sm font-medium text-slate-500 py-2">
+                  {day}
+                </div>
+              ))}
+            </div>
+            
+            <div className="grid grid-cols-5 gap-2">
+              {getAvailableDates().map((date, index) => (
+                <button
+                  key={index}
+                  onClick={() => setFormData(prev => ({ 
+                    ...prev, 
+                    preferredDate: date.toISOString().split('T')[0] 
+                  }))}
+                  className={`p-3 rounded-lg text-sm font-medium transition-colors ${
+                    formData.preferredDate === date.toISOString().split('T')[0]
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  {date.getDate()}
+                </button>
+              ))}
+            </div>
+            
+            <div className="mt-6">
+              <h3 className="font-medium text-slate-900 mb-3">Horarios Disponibles</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {timeSlots.map((time, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setFormData(prev => ({ ...prev, preferredTime: time }))}
+                    className={`p-2 rounded text-sm transition-colors ${
+                      formData.preferredTime === time
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    }`}
+                  >
+                    {time}
+                  </button>
+                ))}
               </div>
-              {errors.fecha && (
-                <p className="text-red-400 text-sm mt-2">{errors.fecha}</p>
-              )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          {/* Formulario */}
-          <Card className="bg-primary-800/50 border-border/50 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-white">Información de Contacto</CardTitle>
-              <CardDescription>
-                Completa tus datos para programar la demo
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Nombre */}
+          {/* Form Section */}
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <Mail className="w-6 h-6 text-indigo-600" />
+              <h2 className="text-2xl font-semibold text-slate-900">Información de Contacto</h2>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="nombre" className="block text-sm font-medium text-white mb-2">
-                    <User className="w-4 h-4 inline mr-2" />
-                    Nombre Completo
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Nombre Completo *
                   </label>
-                  <Input
-                    id="nombre"
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                        errors.name ? 'border-red-500' : 'border-slate-300'
+                      }`}
+                      placeholder="Tu nombre completo"
+                    />
+                  </div>
+                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Email *
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                        errors.email ? 'border-red-500' : 'border-slate-300'
+                      }`}
+                      placeholder="tu@email.com"
+                    />
+                  </div>
+                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Teléfono *
+                  </label>
+                  <div className="relative">
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                        errors.phone ? 'border-red-500' : 'border-slate-300'
+                      }`}
+                      placeholder="+54 11 1234-5678"
+                    />
+                  </div>
+                  {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Empresa *
+                  </label>
+                  <input
                     type="text"
-                    placeholder="Tu nombre completo"
-                    value={formData.nombre}
-                    onChange={(e) => handleInputChange('nombre', e.target.value)}
-                    error={!!errors.nombre}
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                      errors.company ? 'border-red-500' : 'border-slate-300'
+                    }`}
+                    placeholder="Nombre de tu empresa"
                   />
-                  {errors.nombre && (
-                    <p className="text-red-400 text-sm mt-1">{errors.nombre}</p>
-                  )}
+                  {errors.company && <p className="text-red-500 text-sm mt-1">{errors.company}</p>}
                 </div>
+              </div>
 
-                {/* Email */}
+              <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
-                    <Mail className="w-4 h-4 inline mr-2" />
-                    Correo Electrónico
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Fecha Preferida *
                   </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                    error={!!errors.email}
+                  <input
+                    type="date"
+                    name="preferredDate"
+                    value={formData.preferredDate}
+                    onChange={handleInputChange}
+                    min={new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0]}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                      errors.preferredDate ? 'border-red-500' : 'border-slate-300'
+                    }`}
                   />
-                  {errors.email && (
-                    <p className="text-red-400 text-sm mt-1">{errors.email}</p>
-                  )}
+                  {errors.preferredDate && <p className="text-red-500 text-sm mt-1">{errors.preferredDate}</p>}
                 </div>
 
-                {/* Hora */}
                 <div>
-                  <label htmlFor="hora" className="block text-sm font-medium text-white mb-2">
-                    <Clock className="w-4 h-4 inline mr-2" />
-                    Hora Preferida
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Horario Preferido *
                   </label>
                   <select
-                    id="hora"
-                    value={formData.hora}
-                    onChange={(e) => handleInputChange('hora', e.target.value)}
-                    className="w-full px-4 py-3 bg-primary-800 border border-border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-200"
+                    name="preferredTime"
+                    value={formData.preferredTime}
+                    onChange={handleInputChange}
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                      errors.preferredTime ? 'border-red-500' : 'border-slate-300'
+                    }`}
                   >
-                    <option value="">Selecciona una hora</option>
-                    {horasDisponibles.map((hora) => (
-                      <option key={hora} value={hora}>
-                        {hora}
-                      </option>
+                    <option value="">Selecciona un horario</option>
+                    {timeSlots.map((time, index) => (
+                      <option key={index} value={time}>{time}</option>
                     ))}
                   </select>
-                  {errors.hora && (
-                    <p className="text-red-400 text-sm mt-1">{errors.hora}</p>
-                  )}
+                  {errors.preferredTime && <p className="text-red-500 text-sm mt-1">{errors.preferredTime}</p>}
                 </div>
+              </div>
 
-                {/* Fecha seleccionada */}
-                {formData.fecha && (
-                  <div className="p-4 bg-accent/10 border border-accent/20 rounded-lg">
-                    <p className="text-sm text-muted mb-1">Fecha seleccionada:</p>
-                    <p className="text-white font-medium">
-                      {format(formData.fecha, 'EEEE, d \'de\' MMMM \'de\' yyyy', { locale: es })}
-                    </p>
-                  </div>
-                )}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  Mensaje Adicional
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="Cuéntanos más sobre tus necesidades específicas..."
+                />
+              </div>
 
-                {/* Botón de envío */}
-                <Button 
-                  type="submit" 
-                  className="w-full h-14 text-lg font-semibold"
-                  variant="premium"
-                >
-                  Solicitar Demo
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-indigo-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {isSubmitting ? 'Enviando...' : 'Solicitar Demo'}
+              </button>
+            </form>
+          </div>
         </div>
-
-                 {/* Información adicional */}
-         <div className="mt-16 text-center">
-           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-             <div className="text-center">
-               <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                 <Clock className="w-8 h-8 text-accent" />
-               </div>
-               <h3 className="text-xl font-semibold text-white mb-2">Demo Personalizada</h3>
-               <p className="text-muted">
-                 Adaptamos la demostración a tus necesidades específicas
-               </p>
-             </div>
-             <div className="text-center">
-               <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                 <User className="w-8 h-8 text-accent" />
-               </div>
-               <h3 className="text-xl font-semibold text-white mb-2">Experto Dedicado</h3>
-               <p className="text-muted">
-                 Un especialista te guiará durante toda la sesión
-               </p>
-             </div>
-             <div className="text-center">
-               <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                 <CheckCircle className="w-8 h-8 text-accent" />
-               </div>
-               <h3 className="text-xl font-semibold text-white mb-2">Sin Compromiso</h3>
-               <p className="text-muted">
-                 La demo es completamente gratuita y sin obligaciones
-               </p>
-             </div>
-           </div>
-         </div>
-
-         {/* Dashboard Carousel */}
-         <div className="mt-20">
-           <DashboardCarousel 
-             cards={dashboardCards}
-             title="Dashboards que Verás en tu Demo"
-             description="Durante la demostración exploraremos estos dashboards especializados en comercio exterior"
-           />
-         </div>
       </div>
-
-
     </div>
-  )
+  );
 }

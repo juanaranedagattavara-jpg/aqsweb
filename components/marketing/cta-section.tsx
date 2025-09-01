@@ -1,7 +1,7 @@
 'use client'
 
 import { ArrowRight, Play, Calendar, MessageSquare } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+// Button component removed - using standard HTML buttons
 import Link from 'next/link'
 
 export function CTASection() {
@@ -28,16 +28,10 @@ export function CTASection() {
             <p className="text-blue-100 mb-6">
               Descubre cómo nuestra plataforma puede transformar tu análisis de datos.
             </p>
-            <Button
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#0A2540]"
-              asChild
-            >
-              <Link href="/demo">
-                Ver demo
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <Link href="/demo" className="inline-flex items-center px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-[#0A2540] transition-colors">
+              Ver demo
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
 
           {/* Free Trial CTA */}
@@ -49,16 +43,10 @@ export function CTASection() {
             <p className="text-blue-100 mb-6">
               Comienza con una prueba gratuita de 14 días. Sin compromisos.
             </p>
-            <Button
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#0A2540]"
-              asChild
-            >
-              <Link href="/planes">
-                Empezar gratis
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <Link href="/planes" className="inline-flex items-center px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-[#0A2540] transition-colors">
+              Empezar gratis
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
 
           {/* Contact CTA */}
@@ -70,42 +58,23 @@ export function CTASection() {
             <p className="text-blue-100 mb-6">
               Nuestro equipo está listo para ayudarte a encontrar la mejor solución.
             </p>
-            <Button
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-[#0A2540]"
-              asChild
-            >
-              <Link href="/contacto">
-                Contactar
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <Link href="/contacto" className="inline-flex items-center px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-[#0A2540] transition-colors">
+              Contactar
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </div>
 
         {/* Main CTA */}
         <div className="text-center">
           <div className="inline-flex flex-col sm:flex-row gap-4">
-            <Button
-              size="lg"
-              className="bg-white text-[#0A2540] hover:bg-gray-100 px-8 py-4 text-lg"
-              asChild
-            >
-              <Link href="/planes">
-                Empezar ahora
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-[#0A2540] px-8 py-4 text-lg"
-              asChild
-            >
-              <Link href="/contacto">
-                Hablar con ventas
-              </Link>
-            </Button>
+            <Link href="/planes" className="inline-flex items-center px-8 py-4 bg-white text-[#0A2540] hover:bg-gray-100 rounded-lg text-lg font-semibold transition-colors">
+              Empezar ahora
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            <Link href="/contacto" className="inline-flex items-center px-8 py-4 border border-white text-white hover:bg-white hover:text-[#0A2540] rounded-lg text-lg font-semibold transition-colors">
+              Hablar con ventas
+            </Link>
           </div>
 
           <p className="text-blue-100 mt-6 text-sm">

@@ -1,31 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
-import './globals.css'
-import Header from '@/components/layout/header'
+import { Inter } from 'next/font/google'
+import '@/styles/globals.css'
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const playfair = Playfair_Display({ 
-  subsets: ['latin'],
-  variable: '--font-playfair',
-  display: 'swap',
-})
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Analytics Quiet Storm - Transformamos datos en decisiones estratégicas',
-  description: 'Somos expertos en análisis de datos y consultoría estratégica. Ayudamos a empresas a tomar decisiones basadas en datos para impulsar el crecimiento y la innovación.',
-  keywords: ['analytics', 'análisis de datos', 'consultoría estratégica', 'machine learning', 'inteligencia empresarial', 'Analytics Quiet Storm'],
-  authors: [{ name: 'Analytics Quiet Storm Team' }],
-  openGraph: {
-    title: 'Analytics Quiet Storm - Transformamos datos en decisiones estratégicas',
-    description: 'Somos expertos en análisis de datos y consultoría estratégica. Ayudamos a empresas a tomar decisiones basadas en datos para impulsar el crecimiento y la innovación.',
-    type: 'website',
-    locale: 'es_ES',
-  },
+  title: 'QSP Analytics - SaaS Demo',
+  description: 'Demo SaaS de Analytics de Comercio Exterior con Next.js',
 }
 
 export default function RootLayout({
@@ -34,9 +15,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
-      <body className={`${inter.className} antialiased`}>
-        <Header />
+    <html lang="es" className="dark">
+      <body className={inter.className}>
         {children}
       </body>
     </html>

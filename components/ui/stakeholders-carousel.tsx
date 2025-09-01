@@ -30,7 +30,7 @@ export function StakeholdersCarousel({
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [isAutoPlaying, dashboardCards.length])
+  }, [isAutoPlaying])
 
   const nextSlide = () => {
     setCurrentIndex((prev) => {
@@ -120,7 +120,7 @@ export function StakeholdersCarousel({
                          className="group/dashboard"
                        >
                          <Link href="/dashboard">
-                           <div className={`bg-gradient-to-br ${dashboard.color || 'from-primary-500/20 to-primary-600/20'} border border-gray-700/50 rounded-2xl p-6 h-full hover:scale-105 transition-all duration-300 cursor-pointer backdrop-blur-sm hover:border-primary-500/30`}>
+                           <div className={`bg-gradient-to-br ${dashboard.color} border border-gray-700/50 rounded-2xl p-6 h-full hover:scale-105 transition-all duration-300 cursor-pointer backdrop-blur-sm hover:border-primary-500/30`}>
                              {/* Header */}
                              <div className="text-center mb-4">
                                <h3 className="text-lg font-bold text-white mb-2 group-hover/dashboard:text-primary-400 transition-colors">

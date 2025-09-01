@@ -3,85 +3,57 @@ export interface DashboardCard {
   title: string
   description: string
   type: string
-  features: string[]
   color: string
+  features: string[]
 }
 
 export const dashboardCards: DashboardCard[] = [
   {
-    id: 'analitico',
-    title: 'Dashboard Analítico',
+    id: '1',
+    title: 'Análisis de Comercio',
+    description: 'Dashboard completo para análisis de importaciones y exportaciones',
     type: 'analitico',
-    description: 'Monitoreo en tiempo real de métricas clave de comercio exterior con análisis profundo de datos y tendencias del mercado.',
-    features: [
-      'Volúmenes de exportación por región',
-      'Tendencias de precios y demanda',
-      'Análisis de competencia',
-      'Indicadores de rendimiento'
-    ],
-    color: 'from-blue-500/20 to-blue-600/20'
+    color: 'from-blue-500/20 to-purple-500/20',
+    features: ['Métricas en tiempo real', 'Tendencias históricas', 'Análisis por país']
   },
   {
-    id: 'tendencias',
-    title: 'Dashboard de Tendencias',
+    id: '2',
+    title: 'Tendencias de Mercado',
+    description: 'Identifica patrones y tendencias emergentes en el mercado',
     type: 'tendencias',
-    description: 'Visualización dinámica de patrones y flujos del mercado con predicciones estacionales y alertas de oportunidades.',
-    features: [
-      'Análisis de ondas de demanda',
-      'Predicciones estacionales',
-      'Cambios en preferencias del mercado',
-      'Alertas de oportunidades'
-    ],
-    color: 'from-green-500/20 to-green-600/20'
+    color: 'from-cyan-500/20 to-blue-500/20',
+    features: ['Predicciones de demanda', 'Análisis estacional', 'Indicadores clave']
   },
   {
-    id: 'geometrico',
-    title: 'Dashboard Geométrico',
+    id: '3',
+    title: 'Análisis Geométrico',
+    description: 'Visualización avanzada de datos geoespaciales',
     type: 'geometrico',
-    description: 'Representación estructural de datos complejos con mapeo de relaciones comerciales y análisis de clusters.',
-    features: [
-      'Mapeo de relaciones comerciales',
-      'Análisis de clusters de mercado',
-      'Patrones de distribución geográfica',
-      'Segmentación de clientes'
-    ],
-    color: 'from-purple-500/20 to-purple-600/20'
+    color: 'from-orange-500/20 to-red-500/20',
+    features: ['Mapas interactivos', 'Clusters geográficos', 'Análisis de rutas']
   },
   {
-    id: 'redes',
-    title: 'Dashboard de Redes',
+    id: '4',
+    title: 'Redes de Comercio',
+    description: 'Análisis de conexiones y relaciones comerciales',
     type: 'redes',
-    description: 'Análisis de conexiones y flujos comerciales con mapeo de cadenas de suministro y socios comerciales.',
-    features: [
-      'Mapeo de cadenas de suministro',
-      'Análisis de socios comerciales',
-      'Flujos de capital y mercancías',
-      'Identificación de cuellos de botella'
-    ],
-    color: 'from-orange-500/20 to-orange-600/20'
+    color: 'from-green-500/20 to-blue-500/20',
+    features: ['Grafos de relaciones', 'Análisis de influencia', 'Patrones de conexión']
   },
   {
-    id: 'mercado',
-    title: 'Dashboard de Mercado',
+    id: '5',
+    title: 'Mercado Global',
+    description: 'Visión completa del mercado internacional',
     type: 'mercado',
-    description: 'Análisis completo del mercado con métricas de participación, segmentación y oportunidades de crecimiento.',
-    features: [
-      'Market share por empresa',
-      'Segmentación de mercados',
-      'Análisis de productos',
-      'Oportunidades de expansión'
-    ]
+    color: 'from-red-500/20 to-orange-500/20',
+    features: ['Indicadores globales', 'Comparativas por región', 'Análisis de competencia']
   },
   {
-    id: 'competencia',
-    title: 'Dashboard de Competencia',
+    id: '6',
+    title: 'Competencia',
+    description: 'Análisis detallado de la competencia directa',
     type: 'competencia',
-    description: 'Monitoreo inteligente de la competencia con análisis de posicionamiento y estrategias competitivas.',
-    features: [
-      'Análisis de posicionamiento',
-      'Estrategias competitivas',
-      'Benchmarking de rendimiento',
-      'Alertas de movimientos'
-    ]
+    color: 'from-teal-500/20 to-purple-500/20',
+    features: ['Benchmarking', 'Análisis de precios', 'Posicionamiento']
   }
 ]

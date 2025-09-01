@@ -1,35 +1,22 @@
 import { Hero } from '@/components/marketing/hero'
+import { Features } from '@/components/marketing/features'
 import { Benefits } from '@/components/marketing/benefits'
 import { Differentiation } from '@/components/marketing/differentiation'
 import { Vision } from '@/components/marketing/vision'
 import { UseCases } from '@/components/marketing/use-cases'
-import { FinalCTA } from '@/components/marketing/final-cta'
-import { FooterMinimal } from '@/components/layout/footer-minimal'
-import { DashboardCarousel } from '@/components/ui/dashboard-carousel'
-import { dashboardCards } from '@/lib/dashboard-data'
+import { CTA } from '@/components/marketing/cta'
+import { Footer } from '@/components/layout/footer'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-black flex flex-col">
+    <div className="min-h-screen bg-black">
       <Hero />
       <Benefits />
       <Differentiation />
       <Vision />
       <UseCases />
-      
-      {/* Dashboard Carousel */}
-      <section className="py-20 border-t border-gray-800">
-        <DashboardCarousel 
-          cards={dashboardCards}
-          title="Dashboards Interactivos"
-          description="Explora nuestros dashboards especializados en comercio exterior diseñados para transformar datos en decisiones estratégicas"
-        />
-      </section>
-      
-      <FinalCTA />
-      
-      {/* Footer Minimalista */}
-      <FooterMinimal />
-    </main>
+      <CTA />
+      <Footer />
+    </div>
   )
 }
